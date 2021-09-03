@@ -61,7 +61,7 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-2-5 sentences describing what the system does
+Due to the impact of the current global COVID-19 epidemic, in order to let everyone enjoy the fun of “Entertainment without going out” we design this game. This system provides a place for those people who want to enjoy the “all in” pleasant sensation.Our aim is to move the traditional casino to the online digital version.And trying to create the gambaling atmosphere when people sit at home.
 
 ### Pages
 
