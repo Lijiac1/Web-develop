@@ -65,8 +65,11 @@ Due to the impact of the current global COVID-19 epidemic, in order to let every
 
 ### Pages
 
-* Home: 1-3 sentences describing what the page displays and what a user can do
-* Shopping cart: ...
+* Log in page: User can login to his/her own account.
+* Register page: The user who is first time come to our web page need a persional account. This page is for them to sign up an account.
+* Main page(select table): The main page shows the game tables and contain the basic information of the user, like Total chips, Total money,user's ID, User's name.
+* E-Bank page: E-bank page is for user to exchange the chips and money.
+* Game page: For user to play the game that the user choose.
 
 ### Entity-Relationship (ER) Diagram
 
