@@ -3,7 +3,7 @@ const User = require('../modules/user');
 const router = express.Router();
 
 // create a user with given information
-router.post('/users',function(req,res){
+router.post('/users',function(req,res,next){
     let user = new User(req.body);
     client.save(function(err){
         if(err){return next(err);}
@@ -12,7 +12,7 @@ router.post('/users',function(req,res){
     
 });
 // return all users
-router.get('/users',function(req,res){
+router.get('/users',function(req,res,next){
     User.find(function(err,users){
         if(err){return next(err);}
         res.json({'users':users});
@@ -20,7 +20,7 @@ router.get('/users',function(req,res){
     });
 });
 // delete all users
-router.delete('/users',function(req,res){
+router.delete('/users',function(req,res,next){
     User.find(function(err,users){
         if(err){return next(err);}
         users.remove();
@@ -28,7 +28,7 @@ router.delete('/users',function(req,res){
     });
 });
 // return a user with a given id
-router.get('/users/:id',function(req,res){
+router.get('/users/:id',function(req,res,next){
     let id = req.body.id;
     User.findById(id, function(err, user){
         if(err){return next(err);}
@@ -40,7 +40,7 @@ router.get('/users/:id',function(req,res){
     
 });
 // Update the user with the given ID
-router.put('/users/:id',function(req,res){
+router.put('/users/:id',function(req,res,next){
     let id = req.body.id;
     User.findById(id, function(err,user){
         if(err){return next(err);}
@@ -56,8 +56,9 @@ router.put('/users/:id',function(req,res){
 
 
 });
-// Partially update the camel with the given ID
-router.patch('/users/:id',function(req,res){
+
+// Partially update the user with the given ID
+router.patch('/users/:id',function(req,res,next){
     let id = req.params.id;
     User.findById(id, function(err, user){
         if(err){return next(err);}
@@ -76,7 +77,7 @@ router.patch('/users/:id',function(req,res){
 });
 
 //Delete the user with the given ID
-router.delete('/users/:id',function(req,res){
+router.delete('/users/:id',function(req,res,next){
     let id = req.params.id;
     User.findByIdAndDelete(id,function(err, user){
         if(err){return next(err);}
@@ -84,7 +85,7 @@ router.delete('/users/:id',function(req,res){
             return res.status(404).json({'user':'not registered'});
         }
 
-        res.status(201).json(user);
+        res.status(204).json(user);
     });
 
 });
