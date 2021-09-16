@@ -1,69 +1,98 @@
 const express = require('express');
-const user = require('../modules/user');
+const User = require('../modules/user');
 const router = express.Router();
 
-
+// create a user with given information
 router.post('/users',function(req,res){
-    let client = new user(req.body);
+    let user = new User(req.body);
     client.save(function(err){
         if(err){return next(err);}
-        res.status(201).json(client);
+        res.status(201).json(user);
     });
     
-});// a user register to be a client
-
-router.get('users',function(req,res){
-
 });
-
-router.delete('',function(req,res){
-
+// return all users
+router.get('/users',function(req,res){
+    User.find(function(err,users){
+        if(err){return next(err);}
+        res.json({'users':users});
+        res.status(200);
+    });
 });
-
+// delete all users
+router.delete('/users',function(req,res){
+    User.find(function(err,users){
+        if(err){return next(err);}
+        users.remove();
+        res.status(204);
+    });
+});
+// return a user with a given id
 router.get('/users/:id',function(req,res){
-    let id = req.body.account_id;
-    user.findOne({account_id : id}, function(err, client){
+    let id = req.body.id;
+    User.findById(id, function(err, user){
         if(err){return next(err);}
-        if(client == null){
-            return res.status(200).json({'clinet':'not registered'});
+        if(user == null){
+            return res.status(404).json({'user':'not registered'});
         }
-        if(client.password == req.body.password){
-            res.status(201).json(client);
-            res.send('log in successfully');}
-        
+        res.status(200).json(user);
     });
     
-});// a registered client log in 
-
-
-router.patch('/user/:id',function(req,res){
-    let id = req.params.id;
-    user.findById(id, function(err, client){
+});
+// Update the user with the given ID
+router.put('/users/:id',function(req,res){
+    let id = req.body.id;
+    User.findById(id, function(err,user){
         if(err){return next(err);}
-        client.money = req.body.money;
-        client.chips = req.body.chips;
-        client.save();
-        res.status(201).json(client);
+        if(user == null){
+            return res.status(404).json({'user':'not registered'});
+        }
+        user.money = req.body.money;
+        user.chips = req.body.chips;
+        user.save();
+        res.status(201).json(user);
+
+    });
+
+
+});
+// Partially update the camel with the given ID
+router.patch('/users/:id',function(req,res){
+    let id = req.params.id;
+    User.findById(id, function(err, user){
+        if(err){return next(err);}
+        if(user == null){
+            return res.status(404).json({'user':'not registered'});
+        }
+
+        user.money = (req.body.money || user.money);
+        user.chips = (req.body.chips || user.money);
+        user.save();
+        res.status(201).json(user);
     });
 
     
     
-});// a logined client log out and save its information to the database
+});
 
-router.put('/user/:id',function(req,res){
+//Delete the user with the given ID
+router.delete('/users/:id',function(req,res){
     let id = req.params.id;
-    user.findById(id, function(err, client){
+    User.findByIdAndDelete(id,function(err, user){
         if(err){return next(err);}
-        client.money = req.body.money;
-        client.chips = req.body.chips;
-        client.save();
-        res.status(201).json(client);
-    }); 
-    
-})// a client want to exchang money
+        if(user == null){
+            return res.status(404).json({'user':'not registered'});
+        }
+
+        res.status(201).json(user);
+    });
+
+});
 
 
-module.exports = router
+
+
+module.exports = router;
 
 
 
