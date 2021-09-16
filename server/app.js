@@ -4,9 +4,12 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
+const user = require('./controllers/userControllers')
+const game = require('./controllers/gameControllers')
+const e_bank = require('./controllers/e_bankController')
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://dbAG20:dbAG20@cluster0.2ulen.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -31,9 +34,7 @@ app.options('*', cors());
 app.use(cors());
 
 // Import routes
-app.get('/api', function(req, res) {
-    res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
-});
+
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
