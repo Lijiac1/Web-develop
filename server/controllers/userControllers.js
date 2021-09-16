@@ -10,7 +10,7 @@ router.post('/register',function(req,res){
         res.status(201).json(client);
     });
     
-});
+});// a user register to be a client
 
 router.get('/login/:id',function(req,res){
     let id = req.body.account_id;
@@ -25,7 +25,7 @@ router.get('/login/:id',function(req,res){
         
     });
     
-});
+});// a registered client log in 
 
 router.patch('/logout/:id',function(req,res){
     let id = req.params.id;
@@ -39,7 +39,7 @@ router.patch('/logout/:id',function(req,res){
 
     
     
-});
+});// a logined client log out and save its information to the database
 
 router.patch('/exchange/:id',function(req,res){
     let id = req.params.id;
@@ -51,11 +51,7 @@ router.patch('/exchange/:id',function(req,res){
         res.status(201).json(client);
     }); 
     
-});
-
-router.delete('/', function(req, res){
-    res.status(200).send('Delete successfully');
-});
+})// a client want to exchang money
 
 
 module.exports = router
