@@ -3,7 +3,7 @@ const user = require('../modules/user');
 const router = express.Router();
 
 
-router.post('/register',function(req,res){
+router.post('/users',function(req,res){
     let client = new user(req.body);
     client.save(function(err){
         if(err){return next(err);}
@@ -12,7 +12,15 @@ router.post('/register',function(req,res){
     
 });// a user register to be a client
 
-router.get('/login/:id',function(req,res){
+router.get('users',function(req,res){
+
+});
+
+router.delete('',function(req,res){
+
+});
+
+router.get('/users/:id',function(req,res){
     let id = req.body.account_id;
     user.findOne({account_id : id}, function(err, client){
         if(err){return next(err);}
@@ -27,7 +35,8 @@ router.get('/login/:id',function(req,res){
     
 });// a registered client log in 
 
-router.patch('/logout/:id',function(req,res){
+
+router.patch('/user/:id',function(req,res){
     let id = req.params.id;
     user.findById(id, function(err, client){
         if(err){return next(err);}
@@ -41,7 +50,7 @@ router.patch('/logout/:id',function(req,res){
     
 });// a logined client log out and save its information to the database
 
-router.patch('/exchange/:id',function(req,res){
+router.put('/user/:id',function(req,res){
     let id = req.params.id;
     user.findById(id, function(err, client){
         if(err){return next(err);}
