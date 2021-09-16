@@ -51,7 +51,11 @@ router.patch('/exchange/:id',function(req,res){
         res.status(201).json(client);
     }); 
     
-})
+});
+
+router.delete('/', function(req, res){
+    res.status(200).send('Delete successfully');
+});
 
 
 module.exports = router
