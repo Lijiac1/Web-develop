@@ -9,4 +9,4 @@ var gameSchema = new Schema({
     rounds : Number,
 })
 
-module.exports = mongoose.model('game',gameSchema)
+module.exports = mongoose.model('game',gameSchema);
