@@ -66,15 +66,19 @@ router.put('/e_banks/:id',function(req,res,next){
 // Partially update the e_bank with the given ID
 router.patch('/e_banks/:id',function(req,res,next){
     let id = req.params.id;
-    E_bank.findById(id, function(err, e_banks){
+    E_bank.findById(id, function(err, e_bank){
         if(err){return next(err);}
         if(e_banks == null){
             return res.status(404).json({'e_banks':'not found'});
         }
 
-        e_banks.total_money = (req.total_money || e_banks.total_money);
-        e_banks.total_chips = (req.body.total_chips || e_banks.total_chips);
-        e_banks.save();
+        e_bank.total_money = (req.body.total_money || e_bank.total_money);
+        e_bank.total_chips = (req.body.total_chips || e_bank.total_chips);
+        e_bank.money_in = (req.body.money_in || e_bank.money_in);
+        e_bank.money_out = (req.body.money_out || e_bank.money_out);
+        e_bank.chips_in = (req.body.chips_in || e_bank.chips_in);
+        e_bank.chips_out = (req.body.chips_out || e_bank.chips_out);
+        e_bank.save();
         res.status(201).json(e_banks);
     });
 
