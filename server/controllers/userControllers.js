@@ -21,14 +21,10 @@ router.get('/v1/users',function(req,res,next){
 });
 // delete all users
 router.delete('/v1/users',function(req,res,next){
-    User.find(function(err,users){
+    User.remove({},function(err,user){
         if(err){return next(err);}
-        users.remove(function(err){
-            if(err){return next(err);}
-            res.status(204).json(users);
-        });
-        
-    });
+        res.status(204).json(user);
+    })
 });
 // return a user with a given id
 router.get('/v1/users/:id',function(req,res,next){
@@ -93,11 +89,8 @@ router.delete('/v1/users/:id',function(req,res,next){
         if(user == null){
             return res.status(404).json({'user':'not registered'});
         }
-        user.remove(function(err){
-            if(err){return next(err);}
-            res.status(204).json(user);
-    
-        });
+        
+        res.status(204).json(user);
 
         
     });

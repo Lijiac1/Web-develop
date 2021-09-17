@@ -31,14 +31,9 @@ router.get('/v1/e_banks?limit = 5',function(req, res, next){
 
 //delete all e_banks
 router.delete('/v1/e_banks',function(req,res,next){
-    E_bank.find(function(err,e_bank){
+    E_bank.remove({},function(err,e_bank){
         if(err){return next(err);}
-        e_bank.remove(function(err){
-            if(err){return next(err);}
-            res.status(204).json(e_bank);
-        });
-        
-
+        res.status(204).json(e_bank);
     });
 
 })
@@ -113,11 +108,7 @@ router.delete('/v1/e_banks/:id',function(req,res,next){
         if(e_bank == null){
             return res.status(404).json({'e_bank':'not found'});
         }
-        e_bank.remove(function(err){
-            if(err){return next(err);}
-            res.status(204).json(e_bank);
-        })
-        
+        res.status(204).json(e_bank);
     });
 
 });

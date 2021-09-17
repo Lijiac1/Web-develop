@@ -68,13 +68,12 @@ router.delete('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
             return res.status(404).json({'relationship':'not found'});
         }
         if(relationships.user_id == user_id){
-            User.findById(user_id,function(err,user){
+            User.findByIdAndDelete(user_id,function(err,user){
                 if(err){return next(err);}
-                user.remove(function(err){
-                    if(err){return next(err);}
-                    res.status(204).json(user);
-                });
-                
+                if(user == null){
+                    return res.status(404).json({'user':'not found'});
+                }
+                res.status(204).json(user);
             });
 
         }

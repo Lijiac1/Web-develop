@@ -21,11 +21,9 @@ router.get('/v1/games',function(req, res, next){
 });
 //delete all games
 router.delete('/v1/games',function(req,res,next){
-    Game.find(function(err,game){
+    Game.remove({},function(err,game){
         if(err){return next(err);}
-        game.remove();
         res.status(204).json(game);
-
     });
 
 })
