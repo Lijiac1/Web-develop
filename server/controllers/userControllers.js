@@ -5,7 +5,7 @@ const router = express.Router();
 // create a user with given information
 router.post('/v1/users',function(req,res,next){
     let user = new User(req.body);
-    client.save(function(err){
+    User.save(function(err){
         if(err){return next(err);}
         res.status(201).json(user);
     });
