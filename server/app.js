@@ -4,9 +4,10 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
-const user = require('./controllers/userControllers')
-const game = require('./controllers/gameControllers')
-const e_bank = require('./controllers/e_bankController')
+const user = require('./controllers/userControllers');
+const game = require('./controllers/gameControllers');
+const e_bank = require('./controllers/e_bankController');
+const relationship = require('./controllers/relationshipController');
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://dbAG20:dbAG20@cluster0.2ulen.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -34,10 +35,20 @@ app.options('*', cors());
 app.use(cors());
 
 // Import routes
-        
+
+app.use(user);
+app.use(game);
+app.use(e_bank);
+app.use(relationship);
+
+app.use('/',function(req,res){
+
+    res.send('Welcom')
+
+});        
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
-app.use('/api/*', function (req, res) {
+app.use('/v1/*', function (req, res) {
     res.status(404).json({ 'message': 'Not Found' });
 });
 
@@ -69,7 +80,7 @@ app.use(function(err, req, res, next) {
 app.listen(port, function(err) {
     if (err) throw err;
     console.log(`Express server listening on port ${port}, in ${env} mode`);
-    console.log(`Backend: http://localhost:${port}/api/`);
+    console.log(`Backend: http://localhost:${port}/`);
     console.log(`Frontend (production): http://localhost:${port}/`);
 });
 
