@@ -81,3 +81,5 @@ router.delete('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
 
     });
 });
+
+module.exports = router;
