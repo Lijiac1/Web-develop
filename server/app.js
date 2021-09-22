@@ -8,6 +8,9 @@ const user = require('./controllers/userControllers');
 const game = require('./controllers/gameControllers');
 const e_bank = require('./controllers/e_bankController');
 const relationship = require('./controllers/relationshipController');
+const dotenv = require('dotenv')
+dotenv.config();
+
 
 // Variables
 var mongoURI = process.env.MONGODB_URI;
@@ -20,7 +23,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
         console.error(err.stack);
         process.exit(1);
     }
-    console.log(`Connected to MongoDB with URI: ${mongoURI}`);
+    console.log('Connected to MongoDB');
 });
 
 // Create Express app
