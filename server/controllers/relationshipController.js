@@ -14,7 +14,6 @@ router.post('/v1/e_banks/:e_bank_id/users',function(req,res,next){
     relationship.user_id = req.body._id;
     user.save(function(err){
         if(err){return next(err);}
-        res.status(201).json(user);
     });
     relationship.save(function(err){
         if(err){return next(err);}
