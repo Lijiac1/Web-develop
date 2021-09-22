@@ -6,53 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "games/:id",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\" : \"21\",\n    \"rounds\" : 1\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}/v1/games/614407d49576b622c408d071",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"v1",
-						"games",
-						"614407d49576b622c408d071"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "users/:id",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/v1/users/614434158dbfc2420a58eeb9",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"v1",
-						"users",
-						"614434158dbfc2420a58eeb9"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "users",
 			"request": {
 				"method": "POST",
@@ -100,76 +53,6 @@
 		{
 			"name": "games",
 			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/v1/games",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"v1",
-						"games"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET /api",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "e_banks",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/v1/e_banks",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"v1",
-						"e_banks"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "games",
-			"request": {
 				"method": "POST",
 				"header": [],
 				"url": {
@@ -198,24 +81,6 @@
 					"path": [
 						"v1",
 						"games"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "e_banks",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/v1/e_banks",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"v1",
-						"e_banks"
 					]
 				}
 			},
@@ -260,17 +125,66 @@
 			"response": []
 		},
 		{
-			"name": "users",
+			"name": "e_banks",
 			"request": {
-				"method": "DELETE",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v1/users",
+					"raw": "{{host}}/v1/e_banks",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
+						"e_banks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "e_banks/e_bank_id/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"account_id\" : 123,\n    \"password\" : 123,\n    \"name\" : \"test\",\n    \"chips\" : 0,\n    \"money\" : 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/v1/e_banks/61441bb7ea136e2039909196/users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"e_banks",
+						"61441bb7ea136e2039909196",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "e_banks/e_bank_id/users(relationship)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/v1/e_banks/61441bb7ea136e2039909196/users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"e_banks",
+						"61441bb7ea136e2039909196",
 						"users"
 					]
 				}
@@ -347,6 +261,81 @@
 						"v1",
 						"users",
 						"614431e09ea35248a8ee72e5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "games/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/v1/games/614407d49576b622c408d071",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"games",
+						"614407d49576b622c408d071"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "games/:id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"21\",\n    \"rounds\" : 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/v1/games/614407d49576b622c408d071",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"games",
+						"614407d49576b622c408d071"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "games/:id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"21\",\n    \"rounds\" : 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/v1/games/614407d49576b622c408d071",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"games",
+						"614407d49576b622c408d071"
 					]
 				}
 			},
@@ -419,65 +408,6 @@
 			"response": []
 		},
 		{
-			"name": "e_banks/:id",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/v1/e_banks/614417e98a8d561bf5245e40",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"v1",
-						"e_banks",
-						"614417e98a8d561bf5245e40"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "games/:id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/v1/games/614407d49576b622c408d071",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"v1",
-						"games",
-						"614407d49576b622c408d071"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "e_banks/:e_bank_id/users/:user_id",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/v1/e_banks/61441bb7ea136e2039909196/users/614438388e49714cc97b03b4",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"v1",
-						"e_banks",
-						"61441bb7ea136e2039909196",
-						"users",
-						"614438388e49714cc97b03b4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "e_banks/:e_bank_id/users/:user_id",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -506,41 +436,31 @@
 			"response": []
 		},
 		{
-			"name": "e_banks/e_bank_id/users",
+			"name": "e_banks/:id",
 			"request": {
-				"method": "POST",
+				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"account_id\" : 123,\n    \"password\" : 123,\n    \"name\" : \"test\",\n    \"chips\" : 0,\n    \"money\" : 0\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "{{host}}/v1/e_banks/61441bb7ea136e2039909196/users",
+					"raw": "{{host}}/v1/e_banks/614417e98a8d561bf5245e40",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"e_banks",
-						"61441bb7ea136e2039909196",
-						"users"
+						"614417e98a8d561bf5245e40"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "e_banks/e_bank_id/users(relationship)",
+			"name": "e_banks/:e_bank_id/users/:user_id",
 			"request": {
-				"method": "GET",
+				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v1/e_banks/61441bb7ea136e2039909196/users",
+					"raw": "{{host}}/v1/e_banks/61441bb7ea136e2039909196/users/614438388e49714cc97b03b4",
 					"host": [
 						"{{host}}"
 					],
@@ -548,7 +468,27 @@
 						"v1",
 						"e_banks",
 						"61441bb7ea136e2039909196",
-						"users"
+						"users",
+						"614438388e49714cc97b03b4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/v1/users/614434158dbfc2420a58eeb9",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"users",
+						"614434158dbfc2420a58eeb9"
 					]
 				}
 			},
@@ -574,28 +514,54 @@
 			"response": []
 		},
 		{
-			"name": "games/:id",
+			"name": "users",
 			"request": {
-				"method": "PATCH",
+				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\" : \"21\",\n    \"rounds\" : 2\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "{{host}}/v1/games/614407d49576b622c408d071",
+					"raw": "{{host}}/v1/users",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
-						"games",
-						"614407d49576b622c408d071"
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "e_banks",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/v1/e_banks",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"e_banks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "games",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/v1/games",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"games"
 					]
 				}
 			},
