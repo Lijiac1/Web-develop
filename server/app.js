@@ -10,7 +10,7 @@ const e_bank = require('./controllers/e_bankController');
 const relationship = require('./controllers/relationshipController');
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://dbAG20:dbAG20@cluster0.2ulen.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+var mongoURI = process.env.MONGODB_URI;
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
