@@ -5,22 +5,14 @@
     <router-view/>
   </div>
 </template>
-
 <script>
 import navagator from './components/navagator.vue'
-
 export default {
-  
   components: {
-    
     'navagator': navagator
-
   }
-
 }
 </script>
-
-
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
