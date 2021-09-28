@@ -9,7 +9,7 @@
 import navagator from './components/navagator.vue'
 export default {
   components: {
-    'navagator': navagator
+    navagator: navagator
   }
 }
 </script>
