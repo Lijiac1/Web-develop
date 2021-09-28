@@ -1,18 +1,19 @@
 <template>
   <div id="app">
-    
+    <navagator/>
     <!-- Render the content of the current page view -->
     <router-view/>
-    <login-view/>
   </div>
 </template>
 
 <script>
-import Login from '@/components/Login.vue'
+import navagator from './components/navagator.vue'
+
 export default {
   
   components: {
-    "login-view" : Login
+    
+    'navagator': navagator
 
   }
 
