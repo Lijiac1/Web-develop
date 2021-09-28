@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Login from './views/Login.vue'
+import Ebank from './views/E_bank.vue'
+import Games from './views/Games.vue'
 
 Vue.use(Router)
 
@@ -9,9 +12,25 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/Home',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/E_bank',
+      name: 'E_bank',
+      component: Ebank
+    },
+    {
+      path: '/Games',
+      name: 'Games',
+      component: Games
     }
   ]
+
 })
