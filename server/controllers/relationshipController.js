@@ -24,7 +24,7 @@ router.post('/v1/e_banks/:e_bank_id/users',function(req,res,next){
 //return all users under a specific e_bank
 router.get('/v1/e_banks/:e_bank_id/users',function(req,res,next){
     let id = req.params.e_bank_id;
-    Relationship.findById(id, function(err, relationships){
+    Relationship.findBy({e_bank_id : id}, function(err, relationships){
         if(err){return next(err);}
         if(relationships == null){
             return res.status(404).json({'relationship':'not found'});
@@ -39,9 +39,9 @@ router.get('/v1/e_banks/:e_bank_id/users',function(req,res,next){
 });
 
 router.get('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
-    let e_bank_id = req.params.e_bank_id;
+    let ebank_id = req.params.e_bank_id;
     let user_id = req.params.user_id;
-    Relationship.findById(e_bank_id,function(err,relationships){
+    Relationship.findBy({e_bank_id : ebank_id},function(err,relationships){
         if(err){return next(err);}
         if(relationships == null){
             return res.status(404).json({'relationship':'not found'});
@@ -59,9 +59,9 @@ router.get('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
 
 
 router.delete('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
-    let e_bank_id = req.params.e_bank_id;
+    let ebank_id = req.params.e_bank_id;
     let user_id = req.params.user_id;
-    Relationship.findById(e_bank_id,function(err,relationships){
+    Relationship.findBy({e_bank_id : ebank_id},function(err,relationships){
         if(err){return next(err);}
         if(relationships == null){
             return res.status(404).json({'relationship':'not found'});
