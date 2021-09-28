@@ -1,12 +1,24 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-    </div>
+    
     <!-- Render the content of the current page view -->
     <router-view/>
+    <login-view/>
   </div>
 </template>
+
+<script>
+import Login from '@/components/Login.vue'
+export default {
+  
+  components: {
+    "login-view" : Login
+
+  }
+
+}
+</script>
+
 
 <style>
 #app {
