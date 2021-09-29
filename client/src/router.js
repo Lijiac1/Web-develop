@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Ebank from './views/E_bank.vue'
 import Games from './views/Games.vue'
+import Register from './views/Register.vue'
 
 Vue.use(Router)
 
@@ -30,7 +31,13 @@ export default new Router({
       path: '/Games',
       name: 'Games',
       component: Games
+    },
+    {
+      path: '/Register',
+      name: 'register',
+      component: Register
     }
+
   ]
 
 })

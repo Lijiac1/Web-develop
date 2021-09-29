@@ -67,6 +67,7 @@ router.get('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
         }
 
     });
+    res.status(404).json({message: 'not found'})
 });
 
 
@@ -90,6 +91,7 @@ router.delete('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
         }
 
     });
+    res.status(404).json({message: 'not found'})
 });
 
 module.exports = router;

@@ -1,10 +1,16 @@
 <template>
   <div>
-    <b-jumbotron header="DIT341 Frontend" lead="Welcome to your DIT341 Frontend Vue.js App">
+    <!-- <b-jumbotron header="DIT341 Frontend" lead="Welcome to your DIT341 Frontend Vue.js App">
       <b-button class="btn_message" variant="primary" v-on:click="getMessage()" >Get Message from Server</b-button>
       <p>Message from the server:<br/>
       {{ message }}</p>
-    </b-jumbotron>
+    </b-jumbotron> -->
+    <b-container>
+      <b-row>
+        <b-col>1 of 3</b-col>
+
+    </b-row>
+</b-container>
   </div>
 </template>
 
