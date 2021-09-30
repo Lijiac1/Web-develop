@@ -1,17 +1,10 @@
 <template>
   <div id="app">
-    <navagator/>
     <!-- Render the content of the current page view -->
     <router-view/>
   </div>
 </template>
 <script>
-import navagator from './components/navagator.vue'
-export default {
-  components: {
-    navagator: navagator
-  }
-}
 </script>
 <style>
 #app {
