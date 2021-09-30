@@ -1,43 +1,24 @@
 <template>
   <div>
     <navagator/>
+    <Home/>
+
     <!-- <b-jumbotron header="DIT341 Frontend" lead="Welcome to your DIT341 Frontend Vue.js App">
       <b-button class="btn_message" variant="primary" v-on:click="getMessage()" >Get Message from Server</b-button>
       <p>Message from the server:<br/>
       {{ message }}</p>
     </b-jumbotron> -->
-    <b-container>
-      <b-row>
-        <b-col>1 of 3</b-col>
 
-    </b-row>
-</b-container>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import { Api } from '@/Api'
-import navagator from '../components/navagator.vue'
-
+import Home from '../components/Home'
+import navagator from '../components/navagator'
 export default {
-  components: { navagator },
-  name: 'home',
-  data() {
-    return {
-      message: 'none'
-    }
-  },
-  methods: {
-    getMessage() {
-      Api.get('/')
-        .then(response => {
-          this.message = response.data.message
-        })
-        .catch(error => {
-          this.message = error
-        })
-    }
+  components: {
+    navagator,
+    Home
   }
 }
 </script>

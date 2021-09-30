@@ -22,7 +22,7 @@
                             <b-form-input :id="item.id" :type="item.type" v-model=item.value :placeholder="item.placeholder"></b-form-input>
                         </b-col>
                     </b-row>
-                    <b-button variant="outline-primary">Register</b-button>
+                    <b-button variant="outline-primary" to="/register">Register</b-button>
                     <b-button class="ml-2" variant="outline-primary">Login</b-button>
                     </b-card>
                 </b-col>

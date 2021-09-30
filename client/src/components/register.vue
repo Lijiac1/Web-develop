@@ -45,7 +45,7 @@
               >click here</router-link
             >
             <center>
-            <b-button type="submit" variant="outline-primary">Submit</b-button>
+            <b-button type="submit" variant="outline-primary" >Submit</b-button>
       </center>
       </p>
     </b-form>
