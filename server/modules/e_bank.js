@@ -9,6 +9,7 @@ var e_bankSchema = new Schema({
     money_out : Number,
     chips_in : Number,
     chips_out : Number,
+    user_id : [{type: mongoose.Types.ObjectId, ref: 'user'}],
     },
     { timestamps: { createdAt: 'created_at' }
 });

@@ -66,7 +66,8 @@ router.put('/v1/e_banks/:id',function(req,res,next){
         e_bank.money_out = req.body.money_out;
         e_bank.chips_in = req.body.chips_in;
         e_bank.chips_out = req.body.chips_out;
-        
+        e_bank.user_id = (req.body.user_id || e_bank.user_id );
+
         e_bank.save(function(err){
             if(err){return next(err);}
             res.status(201).json(e_bank);
@@ -90,6 +91,8 @@ router.patch('/v1/e_banks/:id',function(req,res,next){
         e_bank.money_out = (req.body.money_out || e_bank.money_out);
         e_bank.chips_in = (req.body.chips_in || e_bank.chips_in);
         e_bank.chips_out = (req.body.chips_out || e_bank.chips_out);
+        e_bank.user_id = (req.body.user_id || e_bank.user_id );
+
         e_bank.save(function(err){
             if(err){return next(err);}
             res.status(201).json(e_bank);

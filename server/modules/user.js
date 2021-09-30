@@ -7,6 +7,7 @@ var userSchema = new Schema({
     name : String,
     chips : Number,
     money : Number,
+    e_bank_id : {type: mongoose.Types.ObjectId, ref: 'e_bank'},
 }
 );
 

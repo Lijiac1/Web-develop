@@ -1,97 +1,63 @@
 const express = require('express');
+const e_bank = require('../modules/e_bank');
 const router = express.Router();
 const E_bank = require('../modules/e_bank');
 const User = require('../modules/user');
-const Relationship = require('../modules/relationships');
+
 
 
 //Create a users with a given id e_bank
 router.post('/v1/e_banks/:e_bank_id/users',function(req,res,next){
     let e_bank_id = req.params.e_bank_id;
     let user = new User(req.body);
-    let relationship = new Relationship();
-    relationship.e_bank_id = e_bank_id;
-    relationship.user_id = user._id;
+    E_bank.findById(e_bank_id, function(err, e_bank){
+        if(err){return next(err);}
+        e_bank.user_id.push(user._id);
+    });
     user.save(function(err){
         if(err){return next(err);}
-    });
-    relationship.save(function(err){
-        if(err){return next(err);}
-        res.status(201).json(relationship);
+        res.status(201).json(user);
     });
 
 });
 //return all users under a specific e_bank
 router.get('/v1/e_banks/:e_bank_id/users',function(req,res,next){
-    let id = req.params.e_bank_id;
-    var Users = [];
-    Relationship.find({e_bank_id : id}, function(err, relationships){
-        
+    let e_bank_id = req.params.e_bank_id;
+    E_bank.findById(e_bank_id, function(err, e_bank){
         if(err){return next(err);}
-        if(relationships == null){
-            return res.status(404).json({'relationship':'not found'});
-        }
-    
-        for (var i=0, l=relationships.length; i<l; i++){
-            
-            let user_id = relationships[i].user_id;
-            User.findById(user_id, function(err,user){
-                if(err){return next(err);}
-                if(!(user == null)){
-                   Users.push(user);
-                }
-                
-            });
-               
-        }
-        console.log(Users)
-        res.status(200).send(Users);    
+        res.status(200).json(e_bank.user_id);
     });
-    
+
 });
 
 router.get('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
-    let ebank_id = req.params.e_bank_id;
+    let e_bank_id = req.params.e_bank_id;
     let user_id = req.params.user_id;
-    Relationship.find({e_bank_id : ebank_id},function(err,relationships){
+    E_bank.findById(e_bank_id, function(err, e_bank){
         if(err){return next(err);}
-        if(relationships == null){
-            return res.status(404).json({'relationship':'not found'});
+        for (let i=0, l=e_bank.user_id.length; i<l; i++){
+            if(user_id == e_bank.user_id[i]){
+                User.findById(user_id, function(err, user){
+                    res.status(200).json(user);
+                });
+                
+            }else {
+                res.status(404).send("not found")
+            }
         }
-        if(relationships.user_id == user_id){
-            User.findById(user_id,function(err,user){
-                if(err){return next(err);}
-                res.status(200).json(user);
-            });
-
-        }
-
     });
-    res.status(404).json({message: 'not found'})
 });
 
 
 router.delete('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
-    let ebank_id = req.params.e_bank_id;
     let user_id = req.params.user_id;
-    Relationship.find({e_bank_id : ebank_id},function(err,relationships){
-        if(err){return next(err);}
-        if(relationships == null){
-            return res.status(404).json({'relationship':'not found'});
+    User.findByIdAndDelete(user_id, function(err){
+        if (err){
+            res.status(404).send(err);
+        }else{
+            res.status(204).send("Deleted!");
         }
-        if(relationships.user_id == user_id){
-            User.findByIdAndDelete(user_id,function(err,user){
-                if(err){return next(err);}
-                if(user == null){
-                    return res.status(404).json({'user':'not found'});
-                }
-                res.status(204).json(user);
-            });
-
-        }
-
-    });
-    res.status(404).json({message: 'not found'})
+    })
 });
 
 module.exports = router;

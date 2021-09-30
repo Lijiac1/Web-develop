@@ -48,6 +48,7 @@ router.put('/v1/users/:id',function(req,res,next){
         }
         user.money = req.body.money;
         user.chips = req.body.chips;
+        user.e_bank_id = (req.body.e_bank_id || user.e_bank_id);
         user.save(function(err){
             if(err){return next(err);}
             res.status(201).json(user)
@@ -70,6 +71,8 @@ router.patch('/v1/users/:id',function(req,res,next){
 
         user.money = (req.body.money || user.money);
         user.chips = (req.body.chips || user.money);
+        user.e_bank_id = (req.body.e_bank_id || user.e_bank_id);
+
         user.save(function(err){
             if(err){return next(err);}
             res.status(201).json(user);
