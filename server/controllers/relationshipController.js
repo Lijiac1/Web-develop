@@ -6,7 +6,7 @@ const User = require('../modules/user');
 
 
 
-//Create a users with a given id e_bank
+//Create a users with a given  e_bank_id
 router.post('/v1/e_banks/:e_bank_id/users',function(req,res,next){
     let e_bank_id = req.params.e_bank_id;
     let user = new User(req.body);
