@@ -23,7 +23,7 @@
                         </b-col>
                     </b-row>
                     <b-button variant="outline-primary" to="/register">Register</b-button>
-                    <b-button class="ml-2" variant="outline-primary">Login</b-button>
+                    <b-button class="ml-2" variant="outline-primary" @click="login">Login</b-button>
                     </b-card>
                 </b-col>
                 <b-col></b-col>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+// import { Api } from '../Api'
 export default {
   name: '',
   data() {
@@ -42,6 +43,17 @@ export default {
         { id: 'password', text: 'Password', type: 'text', value: '', placeholder: 'Enter the Password' }
       ]
     }
+    // },
+    // methonds: {
+    //   login(event) {
+    //     Api.get('/users/:id').then(response => {
+    //       if (!(response.username == null) && (response.password === this.form[1].value)) {
+
+    //       }
+    //     })
+    //   }
+
+  // }
   }
 }
 </script>

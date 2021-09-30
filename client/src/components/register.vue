@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit="onSubmit" v-if="show">
       <b-form-group
         id="input-group-1"
         label="Username: "
@@ -54,7 +54,10 @@
 </template>
 
 <script>
+import { Api } from '../Api'
+
 export default {
+
   data() {
     return {
       form: {
@@ -62,26 +65,16 @@ export default {
         password: '',
         name: ''
       },
-      foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
       show: true
     }
   },
   methods: {
     onSubmit(event) {
-      event.preventDefault()
-      alert(JSON.stringify(this.form))
-    },
-    onReset(event) {
-      event.preventDefault()
-      // Reset our form values
-      this.form.email = ''
-      this.form.name = ''
-      this.form.food = null
-      this.form.checked = []
-      // Trick to reset/clear native browser form validation state
-      this.show = false
-      this.$nextTick(() => {
-        this.show = true
+      Api.post('/users', this.form).then(response => {
+        console.log(response)
+        alert('Register successfully')
+      }).catch(error => {
+        console.error(error)
       })
     }
   }
