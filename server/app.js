@@ -13,7 +13,7 @@ dotenv.config();
 
 
 // Variables
-var mongoURI = process.env.MONGODB_URI;
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopment';
 var port = process.env.PORT || 3000;
 
 // Connect to MongoDB
@@ -44,14 +44,14 @@ app.use(game);
 app.use(e_bank);
 app.use(relationship);
 
-app.use('/',function(req,res){
+app.use('/', function(req, res) {
 
     res.send('Welcom')
 
-});        
+});
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
-app.use('/v1/*', function (req, res) {
+app.use('/v1/*', function(req, res) {
     res.status(404).json({ 'message': 'Not Found' });
 });
 
