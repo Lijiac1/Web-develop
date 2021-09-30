@@ -8,6 +8,7 @@ const user = require('./controllers/userControllers');
 const game = require('./controllers/gameControllers');
 const e_bank = require('./controllers/e_bankController');
 const relationship = require('./controllers/relationshipController');
+const exchange = require('./controllers/exchangeController')
 const dotenv = require('dotenv')
 dotenv.config();
 
@@ -43,6 +44,7 @@ app.use(user);
 app.use(game);
 app.use(e_bank);
 app.use(relationship);
+app.use(exchange);
 
 app.use('/', function(req, res) {
 
