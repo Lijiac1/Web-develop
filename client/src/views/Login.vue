@@ -51,7 +51,7 @@ export default {
   methods: {
 
     login(event) {
-      Api.get(`/users/:${this.form[0].value}`).then(response => {
+      Api.get(`/users/username/:${this.form[0].value}`).then(response => {
         if ((response.username === this.form[0].value) && (response.password === this.form[1].value)) {
           this.islogin = true
           Cookies.set('_id', response._id)
