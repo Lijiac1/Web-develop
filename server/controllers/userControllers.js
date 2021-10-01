@@ -19,6 +19,15 @@ router.get('/v1/users',function(req,res,next){
         res.status(200);
     });
 });
+router.get('/v1/users/username', function(){
+    User.find(function(err,users){
+        if(err){return next(err);}
+        res.json({'users':users});
+        res.status(200);
+
+    });
+});
+
 // delete all users
 router.delete('/v1/users',function(req,res,next){
     User.remove({},function(err,user){

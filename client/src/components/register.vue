@@ -55,6 +55,7 @@
 
 <script>
 import { Api } from '../Api'
+import router from 'vue-router'
 
 export default {
 
@@ -73,6 +74,7 @@ export default {
       Api.post('/users', this.form).then(response => {
         console.log(response)
         alert('Register successfully')
+        router.push('login')
       }).catch(error => {
         console.error(error)
       })

@@ -11,22 +11,22 @@
                 >
                 <b-row>
                     <b-col><label for="textarea-small">Total money:</label></b-col>
-                    <b-col>0</b-col>
+                    <b-col>{{TotalMoney}}</b-col>
 
                 </b-row>
                 <b-row>
                     <b-col><label for="textarea-small">Total chips:</label></b-col>
-                    <b-col>0</b-col>
+                    <b-col>{{TotalChips}}</b-col>
 
                 </b-row>
                 <b-row>
                     <b-col><label for="textarea-small">Your money:</label></b-col>
-                    <b-col>0</b-col>
+                    <b-col>{{YourMony}}</b-col>
 
                 </b-row>
                 <b-row>
                     <b-col><label for="textarea-small">Your chips:</label></b-col>
-                    <b-col>0</b-col>
+                    <b-col>{{YourChips}}</b-col>
 
                 </b-row>
                 </b-card>
@@ -41,8 +41,9 @@
           type="number"
           placeholder="Can not more than total money"
           min="0"
+          v-model="exchange_money"
         ></b-form-input></b-col>
-        <b-col><b-button variant="outline-primary">Exchange</b-button></b-col>
+        <b-col><b-button variant="outline-primary" @click="exchangeMoney">Exchange</b-button></b-col>
         </b-row>
         <b-row class="mt-3">
             <b-col><label for="textarea-small">Exchange Chips</label></b-col>
@@ -51,9 +52,69 @@
           type="number"
           placeholder="Can not more than total chips"
           min="0"
+          v-model="exchange_chips"
         ></b-form-input></b-col>
-        <b-col><b-col><b-button variant="outline-primary">Exchange</b-button></b-col></b-col>
+        <b-col><b-col><b-button variant="outline-primary" @click="exchangeChips">Exchange</b-button></b-col></b-col>
         </b-row>
 
     </b-container>
 </template>
+
+<script>
+import { Api } from '../Api'
+import Cookies from 'js-cookie'
+
+export default {
+  data() {
+    return {
+      TotalMoney: 0,
+      TotalChips: 0,
+      YourMony: 0,
+      YourChips: 0,
+      user_id: null,
+      e_bank_id: null,
+      exchange_chips: 0,
+      exchange_money: 0
+
+    }
+  },
+  mounted() {
+    this.YourMony = Cookies.get('money')
+    this.YourChips = Cookies.get('chips')
+    this.user_id = Cookies.get('_id')
+    // Api.get('v1/users/:id', this.user_id).then(response => {
+    // }).catch(error => {
+    //   console.error(error)
+    // })
+    Api.get('v1/e_banks').then(response => {
+      this.TotalMoney = response.e_banks[0].total_money
+      this.TotalChips = response.e_banks[0].total_chips
+      this.e_bank_id = response.e_banks[0]._id
+    }).catch(error => {
+      console.error(error)
+    })
+  },
+  methods: {
+
+    exchangeMoney(event) {
+      this.total_money = this.total_money - this.exchange_money
+      this.exchange_chips = this.total_chips + this.exchange_money
+      Api.patch(`/v1/e_banks/${this.e_bank_id}`, this.total_money).then(response => {
+        console.log(response)
+      }).catch(error => {
+        console.error(error)
+      })
+    },
+    exchangeChips(event) {
+      this.total_chips = this.total_chips - this.exchange_chips
+      this.exchange_money = this.total_money + this.exchange_chips
+      Api.patch(`/v1/e_banks/${this.e_bank_id}`, this.total_chips).then(response => {
+        console.log(response)
+      }).catch(error => {
+        console.error(error)
+      })
+    }
+
+  }
+}
+</script>
