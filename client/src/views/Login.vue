@@ -35,7 +35,6 @@
 <script>
 import { Api } from '../Api'
 import Cookies from 'js-cookie'
-import router from 'vue-router'
 
 export default {
   name: '',
@@ -59,7 +58,7 @@ export default {
           Cookies.set('chips', response.chips)
           Cookies.set('money', response.money)
           Cookies.set('islogin', this.islogin)
-          router.push('/home')
+          this.$router.push('/home')
         } else {
           alert('Wrong password or username')
         }
