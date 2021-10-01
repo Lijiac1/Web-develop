@@ -23,7 +23,7 @@
                         </b-col>
                     </b-row>
                     <b-button variant="outline-primary" to="/register">Register</b-button>
-                    <b-button class="ml-2" variant="outline-primary" @click="login">Login</b-button>
+                    <b-button class="ml-2" variant="outline-primary" @click="login()">Login</b-button>
                     </b-card>
                 </b-col>
                 <b-col></b-col>
@@ -48,9 +48,10 @@ export default {
       islogin: false
     }
   },
-  methonds: {
+  methods: {
+
     login(event) {
-      Api.get(`/users/${this.form[0].value}`).then(response => {
+      Api.get(`/users/:${this.form[0].value}`).then(response => {
         if ((response.username === this.form[0].value) && (response.password === this.form[1].value)) {
           this.islogin = true
           Cookies.set('_id', response._id)

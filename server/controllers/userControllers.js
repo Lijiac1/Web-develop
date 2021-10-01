@@ -19,10 +19,11 @@ router.get('/v1/users',function(req,res,next){
         res.status(200);
     });
 });
-router.get('/v1/users/username', function(){
-    User.find(function(err,users){
+router.get('/v1/users/:username', function(){
+    let userName = req.params.username;
+    User.findOne({username: userName},function(err,user){
         if(err){return next(err);}
-        res.json({'users':users});
+        res.json(user);
         res.status(200);
 
     });
