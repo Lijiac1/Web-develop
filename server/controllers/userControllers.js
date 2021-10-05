@@ -20,7 +20,7 @@ router.get('/v1/users',function(req,res,next){
     });
 });
 
-router.get('/v1/users/username/:username', function(){
+router.get('/v1/users/username/:username', function(req,res,next){
     let userName = req.params.username;
     User.findOne({username: userName},function(err,user){
         if(err){return next(err);}
