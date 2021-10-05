@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <b-form @submit="onSubmit" v-if="show">
+    <b-form v-if="show">
       <b-form-group
         id="input-group-1"
         label="Username: "
@@ -45,7 +45,7 @@
               >click here</router-link
             >
             <center>
-            <b-button type="submit" variant="outline-primary" >Submit</b-button>
+            <b-button type="submit" variant="outline-primary" @click="onSubmit" >Submit</b-button>
       </center>
       </p>
     </b-form>
@@ -55,7 +55,6 @@
 
 <script>
 import { Api } from '../Api'
-import router from 'vue-router'
 
 export default {
 
@@ -63,21 +62,25 @@ export default {
     return {
       form: {
         username: '',
-        password: '',
-        name: ''
+        password: null,
+        name: '',
+        chips: 0,
+        money: 0
       },
       show: true
     }
   },
   methods: {
     onSubmit(event) {
-      Api.post('/users', this.form).then(response => {
-        console.log(response)
+      if ((this.form.username !== '') && (this.form.name !== '') && (this.form.password != null)) {
         alert('Register successfully')
-        router.push('login')
-      }).catch(error => {
-        console.error(error)
-      })
+
+        Api.post('/users', this.form).then(response => {
+          console.log(response)
+        }).catch(error => {
+          console.error(error)
+        })
+      }
     }
   }
 }

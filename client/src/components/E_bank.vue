@@ -79,7 +79,6 @@ export default {
     }
   },
   mounted() {
-    console.log(Cookies.get('money'))
     this.YourMony = Cookies.get('money')
     this.YourChips = Cookies.get('chips')
     this.user_id = Cookies.get('_id')
@@ -98,8 +97,8 @@ export default {
   methods: {
 
     exchangeMoney(event) {
-      this.total_money = this.total_money - this.exchange_money
-      this.exchange_chips = this.total_chips + this.exchange_money
+      this.TotalMoney = this.TotalMoney - this.exchange_money
+      this.exchange_chips = this.TotalChips + this.exchange_money
       Api.patch(`/e_banks/${this.e_bank_id}`, this.total_money).then(response => {
         console.log(response)
       }).catch(error => {

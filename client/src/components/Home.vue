@@ -5,9 +5,9 @@
           <b-col>
   <b-card-group deck>
       <b-card title="Info of User">
-      <b-list-group-item>Username:</b-list-group-item>
-      <b-list-group-item>Money:</b-list-group-item>
-      <b-list-group-item>Chips:</b-list-group-item>
+      <b-list-group-item>Username:{{username}}</b-list-group-item>
+      <b-list-group-item>Money:{{money}}</b-list-group-item>
+      <b-list-group-item>Chips:{{chips}}</b-list-group-item>
       </b-card>
       </b-card-group>
       </b-col>
@@ -26,17 +26,20 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import { Api } from '@/Api'
+import Cookies from 'js-cookie'
 
 export default {
   name: 'home',
   data() {
     return {
-      message: 'none'
+      username: Cookies.get('username'),
+      money: Cookies.get('money'),
+      chips: Cookies.get('chips')
+
     }
   }
 }
+
 </script>
 
 <style>

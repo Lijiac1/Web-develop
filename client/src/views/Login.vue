@@ -54,10 +54,10 @@ export default {
       Api.get(`/users/username/${this.form[0].value}`).then(response => {
         if ((String(response.data.username) === String(this.form[0].value)) && (String(response.data.password) === String(this.form[1].value))) {
           this.islogin = true
-          Cookies.set('_id', response._id)
-          Cookies.set('Username', response.username)
-          Cookies.set('chips', response.chips)
-          Cookies.set('money', response.money)
+          Cookies.set('_id', response.data._id)
+          Cookies.set('username', response.data.username)
+          Cookies.set('chips', response.data.chips)
+          Cookies.set('money', response.data.money)
           Cookies.set('islogin', this.islogin)
           this.$router.push('/home')
         } else {
