@@ -128,6 +128,11 @@ export default {
       }).catch(error => {
         console.log(error)
       })
+      Api.post('/exchange', { user_id: this.user_id, volume: this.exchange_money }).then(response => {
+        console.log(response)
+      }).catch(error => {
+        console.error(error)
+      })
       this.exchange_money = 0
     },
     exchangeChips(event) {
@@ -158,6 +163,11 @@ export default {
         Cookies.set('chips', this.YourChips)
       }).catch(error => {
         console.log(error)
+      })
+      Api.post('/exchange', { user_id: this.user_id, volume: this.exchange_chips }).then(response => {
+        console.log(response)
+      }).catch(error => {
+        console.error(error)
       })
       this.exchange_chips = 0
     }
