@@ -5,20 +5,20 @@
         <h1>Games</h1>
 <b-row class="mt-5">
           <b-col cols="8">Computer:</b-col>
-          <b-col cols="1">{{}}</b-col>
+          <b-col cols="1">{{computer_number}}</b-col>
 </b-row>
 <b-row class="mt-5">
       <b-col cols="8">You:</b-col>
-    <b-col cols="1"> {{}} </b-col>
+    <b-col cols="1"> {{your_number}} </b-col>
 </b-row>
 
   <b-row class="mt-5">
-      <b-col cols="8">Resoults:</b-col>
-      <b-col cols="1">{{}}</b-col>
+      <b-col cols="8">Results:</b-col>
+      <b-col cols="1">{{results}}</b-col>
   </b-row>
 
   <b-row class="mt-5">
-    <b-col><b-button variant="primary" href="#">Take a card</b-button></b-col>
+    <b-col><b-button variant="primary" href="#" @click="takeAnumber">Take a card</b-button></b-col>
     <b-col><b-button variant="danger" href="#">Leave the game</b-button></b-col>
   </b-row>
   <b-row class="mt-5">
@@ -34,7 +34,35 @@
 
 <script>
 import navagator from '../components/navagator.vue'
+import Cookies from 'js-cookie'
+import { Api } from '../Api'
 export default {
-  components: { navagator }
+  components: { navagator },
+
+  data() {
+    return {
+      computer_number: 0,
+      your_number: 0,
+      results: '',
+      money: Cookies.get('money'),
+      chips: Cookies.get('chips')
+    }
+  },
+  methods: {
+    takeAnumber() {
+      Api.get('/games_random').then(response => {
+        this.computer_number = response.data.number
+      }).catch(error => {
+        console.error(error)
+      })
+      Api.get('/games_random').then(response => {
+        this.your_number = response.data.number
+      }).catch(error => {
+        console.error(error)
+      })
+    }
+
+  }
 }
+
 </script>

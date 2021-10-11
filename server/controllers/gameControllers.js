@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 var Game = require('../modules/game');
 
+
+
 //create a general game
 router.post('/v1/games', function(req,res,next){
     let game = new Game(req.body);
@@ -91,6 +93,14 @@ router.delete('/v1/games/:id',function(req,res,next){
 
 });
 
+router.get('/v1/games_random',function(req,res,next){
+    let num = getRndInteger(1,13);
+    res.json({number : num})
+})
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
 
 
 module.exports = router;

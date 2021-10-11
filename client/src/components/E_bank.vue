@@ -100,7 +100,7 @@ export default {
   methods: {
 
     exchangeMoney(event) {
-      if ((this.TotalMoney >= 0) && (this.TotalChips >= 0) && (this.YourMony - this.exchange_money >= 0) && (this.YourChips - this.exchange_money >= 0)) {
+      if ((this.TotalMoney >= 0) && (this.TotalChips >= 0) && (this.YourChips - this.exchange_money >= 0)) {
         this.TotalMoney = this.TotalMoney - Number(this.exchange_money)
         this.TotalChips = this.TotalChips + Number(this.exchange_money)
         this.YourMony = Number(this.YourMony) + Number(this.exchange_money)
@@ -136,7 +136,7 @@ export default {
       this.exchange_money = 0
     },
     exchangeChips(event) {
-      if ((this.TotalMoney >= 0) && (this.TotalChips >= 0) && (this.YourMony - this.exchange_chips >= 0) && (this.YourChips - this.exchange_chips >= 0)) {
+      if ((this.TotalMoney >= 0) && (this.TotalChips >= 0) && (this.YourMony - this.exchange_chips >= 0)) {
         this.TotalMoney = this.TotalMoney + Number(this.exchange_chips)
         this.TotalChips = this.TotalChips - Number(this.exchange_chips)
         this.YourMony = Number(this.YourMony) - Number(this.exchange_chips)

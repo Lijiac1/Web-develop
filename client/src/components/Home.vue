@@ -42,7 +42,7 @@ export default {
 
     }
   },
-  mouted() {
+  mounted() {
     Api.get('/e_banks').then(response => {
       this.e_bank_id = response.data.e_banks[1]._id
     }).catch(error => {
@@ -51,6 +51,7 @@ export default {
     Cookies.set('e_bank_id', this.e_bank_id)
   },
   methods: {
+
     topup(event) {
       this.money = Number(this.money) + 10000
       Cookies.set('money', this.money)
