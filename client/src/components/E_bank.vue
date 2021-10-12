@@ -93,6 +93,8 @@ export default {
       this.TotalMoney = response.data.e_banks[1].total_money
       this.TotalChips = response.data.e_banks[1].total_chips
       this.e_bank_id = response.data.e_banks[1]._id
+      Cookies.set('e_bank_id', this.e_bank_id)
+      Cookies.set('total_chips', this.TotalChips)
     }).catch(error => {
       console.error(error)
     })
@@ -114,7 +116,8 @@ export default {
       }
       const u = {
         money: this.YourMony,
-        chips: this.YourChips
+        chips: this.YourChips,
+        e_bank_id: this.e_bank_id
       }
       Api.patch(`/e_banks/${this.e_bank_id}`, j).then(response => {
         console.log(response)
@@ -150,7 +153,8 @@ export default {
       }
       const u = {
         money: this.YourMony,
-        chips: this.YourChips
+        chips: this.YourChips,
+        e_bank_id: this.e_bank_id
       }
       Api.patch(`/e_banks/${this.e_bank_id}`, j).then(response => {
         console.log(response)
