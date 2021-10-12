@@ -17,6 +17,11 @@
       <b-col cols="1">{{results}}</b-col>
   </b-row>
 
+<b-row class="mt-5">
+    <b-col cols="8">Your Chips:</b-col>
+    <b-col cols="1">{{YourChips}}</b-col>
+  </b-row>
+
   <b-row class="mt-5">
     <b-col><b-button variant="primary" href="#" @click="takeAnumber">Take a card</b-button></b-col>
     <b-col><b-button variant="danger" href="#">Leave the game</b-button></b-col>
