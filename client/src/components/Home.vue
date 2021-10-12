@@ -9,20 +9,25 @@
       <b-list-group-item>Money:{{money}}</b-list-group-item>
       <b-list-group-item>Chips:{{chips}}</b-list-group-item>
       <b-button class = "mt-2" variant="outline-primary" @click="topup">Top up</b-button>
+      <b-button class = "mt-2" variant="outline-primary" >Delete all user</b-button>
+      <b-button class = "mt-2" variant="outline-primary" >Delete the user</b-button>
       </b-card>
       </b-card-group>
       </b-col>
       <b-col>
          <b-card title="Intro of Game">
-<b-text> The player draws cards randomly from 1-10.
-    When the sum is equal to 21, they win, and if the sum is greater than 21,
-    they lose. The value in the computer's hand is a random number between 15-21.
-     When the player decides not to draw any more cards,
-     the sum of the cards in the hand is less than 21 and is closer to 21,
-      or the hand equals to 21 wins</b-text>
+<b-text> The player take a card,compare with the card that the computer got, the bigger one win.</b-text>
          </b-card>
+         <b-card title="Relationship">
+          <b-row>
+          <b-col cols="10">Relation:{{}}</b-col>
+          </b-row>
+          <b-button class = "mt-2" variant="outline-primary" >Post relationship</b-button>
+          <b-button class = "mt-2" variant="outline-primary" >Get relationship</b-button>
+        </b-card>
       </b-col>
       </b-row>
+
   </div>
 </template>
 
