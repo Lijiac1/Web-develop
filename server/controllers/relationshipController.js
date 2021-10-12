@@ -12,7 +12,9 @@ router.post('/v1/e_banks/:e_bank_id/users',function(req,res,next){
     let user = new User(req.body);
     E_bank.findById(e_bank_id, function(err, e_bank){
         if(err){return next(err);}
+        
         e_bank.user_id.push(user._id);
+        e_bank.save()
     });
     user.save(function(err){
         if(err){return next(err);}
