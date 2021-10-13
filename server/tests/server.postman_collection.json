@@ -253,14 +253,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v1/users/{{userid}}",
+					"raw": "{{host}}/v1/users/6165d9b3904c6a3ed4648fd3",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"users",
-						"{{userid}}"
+						"6165d9b3904c6a3ed4648fd3"
 					]
 				}
 			},
