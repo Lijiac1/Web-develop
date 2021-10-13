@@ -1,6 +1,8 @@
 <template>
   <div>
-      <h1> Home </h1>
+      <h1 class="home"> Home </h1>
+      <p id = "abc">123</p>
+      <p>456</p>
       <b-row style="midiemwidth: 38rem; height: 50" >
           <b-col>
   <b-card-group deck>
@@ -9,8 +11,8 @@
       <b-list-group-item class="userList">Money:{{money}}</b-list-group-item>
       <b-list-group-item class="userList">Chips:{{chips}}</b-list-group-item>
       <b-button class = "mt-2" variant="outline-primary" @click="topup">Top up</b-button>
-      <b-button class = "mt-2" variant="outline-primary" >Delete all user</b-button>
-      <b-button class = "mt-2" variant="outline-primary" >Delete the user</b-button>
+      <b-button class = "mt-2" variant="outline-primary" @click="deleteAlluser">Delete all user</b-button>
+      <b-button class = "mt-2" variant="outline-primary" @click="deleteTheuser">Delete the user</b-button>
       </b-card>
       </b-card-group>
       </b-col>
@@ -20,10 +22,10 @@
          </b-card>
          <b-card title="Relationship">
           <b-row>
-          <b-col cols="10">Relation:{{}}</b-col>
+          <b-col cols="10">Relation:{{relationship}}</b-col>
           </b-row>
-          <b-button class = "mt-2" variant="outline-primary" >Post relationship</b-button>
-          <b-button class = "mt-2" variant="outline-primary" >Get relationship</b-button>
+          <b-button class = "mt-2" variant="outline-primary" @click="postRelationship">Post relationship</b-button>
+          <b-button class = "mt-2" variant="outline-primary" @click="getRelationship">Get relationship</b-button>
         </b-card>
       </b-col>
       </b-row>
@@ -43,7 +45,8 @@ export default {
       username: Cookies.get('username'),
       money: Cookies.get('money'),
       chips: Cookies.get('chips'),
-      e_bank_id: null
+      e_bank_id: null,
+      relationship: null
 
     }
   },
@@ -67,6 +70,42 @@ export default {
       }
       Api.put(`/users/${this.user_id}`, u).then(response => {
         console.log(response)
+      }).catch(error => {
+        console.error(error)
+      })
+    },
+    deleteAlluser() {
+      Api.delete('/users').then(response => {
+        this.$router.push('/')
+      }).catch(error => {
+        console.error(error)
+      })
+    },
+    deleteTheuser() {
+      Api.delete(`/users/${this.user_id}`).then(response => {
+        this.$router.push('/')
+      }).catch(error => {
+        console.error(error)
+      })
+    },
+    postRelationship() {
+      const u = {
+        username: 'test',
+        password: 123,
+        name: 'test',
+        money: 0,
+        chips: 0,
+        e_bank_id: null
+
+      }
+      Api.post(`/e_banks/${this.e_bank_id}/users`, u).then(response => {
+      }).catch(error => {
+        console.error(error)
+      })
+    },
+    getRelationship() {
+      Api.get(`/e_banks/${this.e_bank_id}/users`).then(response => {
+        this.relationship = response.data
       }).catch(error => {
         console.error(error)
       })

@@ -12,7 +12,9 @@ router.post('/v1/e_banks/:e_bank_id/users',function(req,res,next){
     let user = new User(req.body);
     E_bank.findById(e_bank_id, function(err, e_bank){
         if(err){return next(err);}
+        
         e_bank.user_id.push(user._id);
+        e_bank.save()
     });
     user.save(function(err){
         if(err){return next(err);}
@@ -38,11 +40,8 @@ router.get('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
         for (let i=0, l=e_bank.user_id.length; i<l; i++){
             if(user_id == e_bank.user_id[i]){
                 User.findById(user_id, function(err, user){
-                    res.status(200).json(user);
+                    res.status(200).json(user)
                 });
-                
-            }else {
-                res.status(404).send("not found")
             }
         }
     });
