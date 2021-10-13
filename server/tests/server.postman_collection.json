@@ -245,7 +245,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \r\n    \"chips\" : 99999,\r\n    \"money\" : 0,\r\n    \"e_bank_id\": \"{{eBankId}}\"\r\n}",
+					"raw": "{ \r\n    \"chips\" : 99999,\r\n    \"money\" : 0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -253,14 +253,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v1/users/{{userId}}",
+					"raw": "{{host}}/v1/users/{{userid}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"users",
-						"{{userId}}"
+						"{{userid}}"
 					]
 				}
 			},
@@ -328,7 +328,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users/{{userId}}",
+					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users/{{userid}}",
 					"host": [
 						"{{host}}"
 					],
@@ -337,7 +337,7 @@
 						"e_banks",
 						"{{ebankid}}",
 						"users",
-						"{{userId}}"
+						"{{userid}}"
 					]
 				}
 			},
@@ -389,14 +389,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v1/users/{{userId}}",
+					"raw": "{{host}}/v1/users/{{userid}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"users",
-						"{{userId}}"
+						"{{userid}}"
 					]
 				}
 			},
@@ -417,14 +417,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v1/users/{{userId}}",
+					"raw": "{{host}}/v1/users/{{userid}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"users",
-						"{{userId}}"
+						"{{userid}}"
 					]
 				}
 			},
