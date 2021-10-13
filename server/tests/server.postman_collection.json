@@ -281,14 +281,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v1/e_banks/615c2b36e8714b40b0b5e69c/users",
+					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"e_banks",
-						"615c2b36e8714b40b0b5e69c",
+						"{{ebankid}}",
 						"users"
 					]
 				}
@@ -328,7 +328,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users/6165d964904c6a3ed4648fc9",
+					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
@@ -337,7 +337,7 @@
 						"e_banks",
 						"{{ebankid}}",
 						"users",
-						"6165d964904c6a3ed4648fc9"
+						"{{userId}}"
 					]
 				}
 			},
@@ -389,14 +389,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v1/users/6165d964904c6a3ed4648fc9",
+					"raw": "{{host}}/v1/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"users",
-						"6165d964904c6a3ed4648fc9"
+						"{{userId}}"
 					]
 				}
 			},
@@ -417,14 +417,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v1/users/6165d964904c6a3ed4648fc9",
+					"raw": "{{host}}/v1/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"users",
-						"6165d964904c6a3ed4648fc9"
+						"{{userId}}"
 					]
 				}
 			},
@@ -605,7 +605,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users/6165d964904c6a3ed4648fc9",
+					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
@@ -614,7 +614,7 @@
 						"e_banks",
 						"{{ebankid}}",
 						"users",
-						"6165d964904c6a3ed4648fc9"
+						"{{userId}}"
 					]
 				}
 			},
