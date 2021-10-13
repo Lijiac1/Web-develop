@@ -1,6 +1,8 @@
 <template>
   <div>
-      <h1> Home </h1>
+      <h1 class="home"> Home </h1>
+      <p id = "abc">123</p>
+      <p>456</p>
       <b-row style="midiemwidth: 38rem; height: 50" >
           <b-col>
   <b-card-group deck>
@@ -117,5 +119,14 @@ export default {
 <style>
 .btn_message {
   margin-bottom: 1em;
+}
+.home{
+  color: rgb(23, 228, 23);
+}
+#abc{
+  color: rgb(235, 17, 17);
+}
+p{
+  color: rgb(24, 27, 211);
 }
 </style>

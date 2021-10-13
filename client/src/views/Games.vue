@@ -70,30 +70,29 @@ export default {
       if (this.chipsOn) {
         Api.get('/games_random').then(response => {
           this.computer_number = Number(response.data.number)
-        }).catch(error => {
-          console.error(error)
-        })
-        Api.get('/games_random').then(response => {
+          return Api.get('/games_random')
+        }).then(response => {
           this.your_number = Number(response.data.number)
+          if (this.computer_number > this.your_number) {
+            this.results = 'You Lose'
+            this.total_chips = Number(this.total_chips) + this.bet
+            this.chips = Number(this.chips) - this.bet
+          } else if (this.computer_number < this.your_number) {
+            this.results = 'You Win'
+            this.total_chips = Number(this.total_chips) - this.bet
+            this.chips = Number(this.chips) + this.bet
+          } else {
+            this.results = 'Break even'
+          }
         }).catch(error => {
           console.error(error)
+        }).then(() => {
+          this.bet = 0
         })
-        if (this.computer_number > this.your_number) {
-          this.results = 'You Lose'
-          this.total_chips = Number(this.total_chips) + this.bet
-          this.chips = Number(this.chips) - this.bet
-        } else if (this.computer_number < this.your_number) {
-          this.results = 'You Win'
-          this.total_chips = Number(this.total_chips) - this.bet
-          this.chips = Number(this.chips) + this.bet
-        } else {
-          this.results = 'Break even'
-        }
         this.chipsOn = false
-        this.bet = 0
-        this.rounds = this.rounds + 1
         this.computer_number = 0
         this.your_number = 0
+        this.rounds = this.rounds + 1
       } else {
         alert('Please bet')
       }
