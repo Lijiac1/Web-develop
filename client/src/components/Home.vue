@@ -1,8 +1,6 @@
 <template>
   <div>
       <h1 class="home"> Home </h1>
-      <p id = "abc">123</p>
-      <p>456</p>
       <b-row style="midiemwidth: 38rem; height: 50" >
           <b-col>
   <b-card-group deck>
