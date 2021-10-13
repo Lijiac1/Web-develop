@@ -160,5 +160,10 @@ export default {
 .result{
   color: brown;
 }
+h2{
+  color: blueviolet;
+  font-family: monospace;
+  font-style:italic;
+}
 
 </style>

@@ -188,6 +188,8 @@ export default {
 }
 h3{
   color: gold;
+  font-family:monospace;
+  font-style:italic;
 }
 .ebank_info p{
 color: red;

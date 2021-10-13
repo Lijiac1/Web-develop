@@ -120,6 +120,8 @@ export default {
 }
 h1{
   color: orange;
+  font-family:monospace;
+  font-style:italic;
 }
 #card{
   color: rgb(252, 0, 0);
