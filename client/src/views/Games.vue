@@ -28,16 +28,16 @@
   </b-row>
 
   <b-row class="mt-5">
-    <b-col><b-button variant="primary" @click="takeAnumber">Take a card</b-button></b-col>
-    <b-col><b-button variant="primary" @click="clean">Clean the bet</b-button></b-col>
-    <b-col><b-button variant="danger" @click="leave">Leave the game</b-button></b-col>
+    <b-col><b-button variant="outline-primary" @click="takeAnumber">Take card</b-button></b-col>
+    <b-col><b-button variant="outline-primary" @click="clean">Clean the bet</b-button></b-col>
+    <b-col><b-button variant="outline-primary" @click="leave">Quit Game</b-button></b-col>
   </b-row>
 
   <b-row class="mt-5">
     <b-col>place the Chips</b-col>
     <b-col ><b-button variant="primary" @click="fifty">50</b-button></b-col>
     <b-col col lg="1"><b-button variant="primary" @click="hundred">100</b-button></b-col>
-    <b-col><b-button variant="primary" @click="allIn">All in!</b-button></b-col>
+    <b-col><b-button variant="primary" @click="allIn">AllIn!</b-button></b-col>
   </b-row>
 
     </b-container >
