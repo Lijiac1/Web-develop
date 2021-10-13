@@ -12,15 +12,3 @@ var userSchema = new Schema({
 );
 
 module.exports = mongoose.model('user',userSchema)
-
-
-
-// var table = new Schema({
-//     id : Number,
-//     people : Number,
-
-// })
-
-
-// module.exports = mongoose.model('table',table)
-

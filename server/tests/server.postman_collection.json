@@ -7,12 +7,28 @@
 	"item": [
 		{
 			"name": "users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"    pm.test('creat a user',()=>{",
+							"        pm.response.to.have.status(201)",
+							"    })",
+							"    const jsonData = pm.response.json();",
+							"    pm.environment.set('userId',jsonData._id)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\" : 123,\r\n    \"password\" : 123,\r\n    \"name\" : \"test\",\r\n    \"chips\" : 0,\r\n    \"money\" : 0\r\n\r\n}",
+					"raw": "{\r\n    \"account_id\" : 123,\r\n    \"password\" : 123,\r\n    \"name\" : \"test\",\r\n    \"chips\" : 0,\r\n    \"money\" : 0\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -107,21 +123,22 @@
 		},
 		{
 			"name": "games",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('get a game',()=>{",
+							"        pm.response.to.have.status(200)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "text"
-						}
-					}
-				},
 				"url": {
 					"raw": "{{host}}/v1/games",
 					"host": [
@@ -137,6 +154,21 @@
 		},
 		{
 			"name": "e_banks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" pm.test('creat an eBank',()=>{",
+							"        pm.response.to.have.status(201)",
+							"    })",
+							"    const jsonData = pm.response.json();",
+							"    pm.environment.set('eBankId',jsonData._id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -153,7 +185,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"total_money\" : 10000000,\r\n\"total_chips\" : 10000000,\r\n\"money_in\" : 0,\r\n\"money_out\" : 0,\r\n\"chips_in\" : 0,\r\n\"chips_out\" : 0\r\n\r\n}",
+					"raw": "{\n    \"total_money\" : 100000,\n    \"total_chips\" : 100000,\n    \"money_in\" : 0,\n    \"money_out\" : 0,\n    \"chips_in\" : 0,\n    \"chips_out\" : 0,\n    \"user_id\": [\"{{userId}}\"]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -205,26 +237,6 @@
 			"response": []
 		},
 		{
-			"name": "users/username/:username",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/v1/users/username/123",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"v1",
-						"users",
-						"username",
-						"123"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "users/:id",
 			"event": [
 				{
@@ -245,7 +257,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \r\n    \"chips\" : 99999,\r\n    \"money\" : 0\r\n}",
+					"raw": "{ \r\n    \"chips\" : 99999,\r\n    \"money\" : 0,\r\n    \"e_bank_id\": \"{{eBankId}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -253,14 +265,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v1/users/6165d9b3904c6a3ed4648fd3",
+					"raw": "{{host}}/v1/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"users",
-						"6165d9b3904c6a3ed4648fd3"
+						"{{userId}}"
 					]
 				}
 			},
@@ -268,12 +280,25 @@
 		},
 		{
 			"name": "e_banks/e_bank_id/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('creat an eBank-users relasionship',()=>{",
+							"        pm.response.to.have.status(201)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"account_id\" : 123,\n    \"password\" : 123,\n    \"name\" : \"test\",\n    \"chips\" : 97,\n    \"money\" : 0\n}",
+					"raw": "{\n    \"account_id\" : 123,\n    \"password\" : 123,\n    \"name\" : \"test\",\n    \"chips\" : 0,\n    \"money\" : 0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -281,14 +306,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users",
+					"raw": "{{host}}/v1/e_banks/{{eBankId}}/users",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"e_banks",
-						"{{ebankid}}",
+						"{{eBankId}}",
 						"users"
 					]
 				}
@@ -297,18 +322,43 @@
 		},
 		{
 			"name": "e_banks/e_bank_id/users(relationship)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('get eBank-users relasionship',()=>{",
+							"        pm.response.to.have.status(200)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users",
+					"raw": "{{host}}/v1/e_banks/{{eBankId}}/users",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"e_banks",
-						"{{ebankid}}",
+						"{{eBankId}}",
 						"users"
 					]
 				}
@@ -317,6 +367,20 @@
 		},
 		{
 			"name": "e_banks/:e_bank_id/users/:user_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('get relation with single user and eBank',()=>{",
+							"        pm.response.to.have.status(200)",
+							"    })",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -328,16 +392,16 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users/{{userid}}",
+					"raw": "{{host}}/v1/e_banks/{{eBankId}}/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"e_banks",
-						"{{ebankid}}",
+						"{{eBankId}}",
 						"users",
-						"{{userid}}"
+						"{{userId}}"
 					]
 				}
 			},
@@ -385,18 +449,31 @@
 		},
 		{
 			"name": "users/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('get userId',()=>{",
+							"        pm.response.to.have.status(200)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v1/users/{{userid}}",
+					"raw": "{{host}}/v1/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"users",
-						"{{userid}}"
+						"{{userId}}"
 					]
 				}
 			},
@@ -404,6 +481,20 @@
 		},
 		{
 			"name": "users/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('put userId',()=>{",
+							"        pm.response.to.have.status(201)",
+							"    })",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -417,14 +508,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v1/users/{{userid}}",
+					"raw": "{{host}}/v1/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"users",
-						"{{userid}}"
+						"{{userId}}"
 					]
 				}
 			},
@@ -432,6 +523,20 @@
 		},
 		{
 			"name": "games/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('get gameId',()=>{",
+							"        pm.response.to.have.status(200)",
+							"    })",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -451,6 +556,19 @@
 		},
 		{
 			"name": "games/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('put gameId',()=>{",
+							"        pm.response.to.have.status(201)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -479,6 +597,20 @@
 		},
 		{
 			"name": "games/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('patch gameId',()=>{",
+							"        pm.response.to.have.status(201)",
+							"    })",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PATCH",
 				"header": [],
@@ -507,18 +639,32 @@
 		},
 		{
 			"name": "e_banks/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('get eBankId',()=>{",
+							"        pm.response.to.have.status(200)",
+							"    })",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}",
+					"raw": "{{host}}/v1/e_banks/{{eBankId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"e_banks",
-						"{{ebankid}}"
+						"{{eBankId}}"
 					]
 				}
 			},
@@ -526,6 +672,19 @@
 		},
 		{
 			"name": "e_banks/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('put eBankId',()=>{",
+							"        pm.response.to.have.status(201)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -539,14 +698,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}",
+					"raw": "{{host}}/v1/e_banks/{{eBankId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"e_banks",
-						"{{ebankid}}"
+						"{{eBankId}}"
 					]
 				}
 			},
@@ -554,27 +713,31 @@
 		},
 		{
 			"name": "e_banks/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('patch eBankId',()=>{",
+							"        pm.response.to.have.status(201)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PATCH",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"user_id\" : []\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}",
+					"raw": "{{host}}/v1/e_banks/{{eBankId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"e_banks",
-						"{{ebankid}}"
+						"{{eBankId}}"
 					]
 				}
 			},
@@ -582,18 +745,31 @@
 		},
 		{
 			"name": "e_banks/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('delet eBankId',()=>{",
+							"        pm.response.to.have.status(204)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}",
+					"raw": "{{host}}/v1/e_banks/{{eBankId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"e_banks",
-						"{{ebankid}}"
+						"{{eBankId}}"
 					]
 				}
 			},
@@ -601,18 +777,31 @@
 		},
 		{
 			"name": "e_banks/:e_bank_id/users/:user_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"    pm.test('delet eBankId and user relations',()=>{",
+							"        pm.response.to.have.status(204)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v1/e_banks/{{ebankid}}/users/{{userId}}",
+					"raw": "{{host}}/v1/e_banks/{{eBankId}}/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"e_banks",
-						"{{ebankid}}",
+						"{{eBankId}}",
 						"users",
 						"{{userId}}"
 					]
@@ -621,19 +810,75 @@
 			"response": []
 		},
 		{
+			"name": "users Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"    pm.test('creat a user',()=>{",
+							"        pm.response.to.have.status(201)",
+							"    })",
+							"    const jsonData = pm.response.json();",
+							"    pm.environment.set('userId',jsonData._id)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"account_id\" : 123,\r\n    \"password\" : 123,\r\n    \"name\" : \"test\",\r\n    \"chips\" : 0,\r\n    \"money\" : 0\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/v1/users",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "users/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('delet userId',()=>{",
+							"        pm.response.to.have.status(204)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v1/users/{{userid}}",
+					"raw": "{{host}}/v1/users/{{userId}}",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"v1",
 						"users",
-						"{{userid}}"
+						"{{userId}}"
 					]
 				}
 			},
@@ -641,6 +886,19 @@
 		},
 		{
 			"name": "games/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('delet gameId',()=>{",
+							"        pm.response.to.have.status(204)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -775,19 +1033,8 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://localhost:3000"
-		},
-		{
-			"key": "gameId",
-			"value": "61660608904c6a3ed4649696"
-		},
-		{
-			"key": "ebankid",
-			"value": "615c2b36e8714b40b0b5e69c"
-		},
-		{
-			"key": "userid",
-			"value": "6165d964904c6a3ed4648fc9"
+			"value": "http://localhost:3000",
+			"type": "string"
 		}
 	]
 }
