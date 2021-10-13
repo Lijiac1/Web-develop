@@ -40,11 +40,8 @@ router.get('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
         for (let i=0, l=e_bank.user_id.length; i<l; i++){
             if(user_id == e_bank.user_id[i]){
                 User.findById(user_id, function(err, user){
-                    res.status(200).json(user);
+                    res.status(200).json(user)
                 });
-                
-            }else {
-                res.status(404).send("not found")
             }
         }
     });
