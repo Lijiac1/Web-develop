@@ -237,6 +237,26 @@
 			"response": []
 		},
 		{
+			"name": "users/username/:username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/v1/users/username/{{username}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"users",
+						"username",
+						"{{username}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "users/:id",
 			"event": [
 				{
