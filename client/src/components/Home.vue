@@ -4,10 +4,10 @@
       <b-row style="midiemwidth: 38rem; height: 50" >
           <b-col>
   <b-card-group deck>
-      <b-card title="Info of User">
-      <b-list-group-item>Username:{{username}}</b-list-group-item>
-      <b-list-group-item>Money:{{money}}</b-list-group-item>
-      <b-list-group-item>Chips:{{chips}}</b-list-group-item>
+      <b-card class="user" title="Info of User">
+      <b-list-group-item class="userList">Username:{{username}}</b-list-group-item>
+      <b-list-group-item class="userList">Money:{{money}}</b-list-group-item>
+      <b-list-group-item class="userList">Chips:{{chips}}</b-list-group-item>
       <b-button class = "mt-2" variant="outline-primary" @click="topup">Top up</b-button>
       <b-button class = "mt-2" variant="outline-primary" >Delete all user</b-button>
       <b-button class = "mt-2" variant="outline-primary" >Delete the user</b-button>
@@ -15,8 +15,8 @@
       </b-card-group>
       </b-col>
       <b-col>
-         <b-card title="Intro of Game">
-<b-text> The player take a card,compare with the card that the computer got, the bigger one win.</b-text>
+         <b-card id="card" title="Intro of Game">
+<b-text id= "text"> The player take a card,compare with the card that the computer got, the bigger one win.</b-text>
          </b-card>
          <b-card title="Relationship">
           <b-row>
@@ -81,4 +81,20 @@ export default {
 .btn_message {
   margin-bottom: 1em;
 }
+h1{
+  color: orange;
+}
+#card{
+  color: rgb(252, 0, 0);
+}
+#text{
+  color: black;
+}
+.user{
+  color: rgb(0, 181, 253);
+}
+.userList{
+  color: black;
+}
+
 </style>

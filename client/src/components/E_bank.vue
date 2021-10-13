@@ -1,6 +1,7 @@
-<template>
+<template >
     <b-container class="mt-5">
-        <b-row class="mt-5">
+      <h3>E_bank</h3>
+        <b-row class="ebank_info">
             <b-col>
                 <b-card
                 border-variant="primary"
@@ -9,8 +10,9 @@
                 header-text-variant="white"
                 class="mt-5"
                 >
-                <b-row>
-                    <b-col><label for="textarea-small">Total money:</label></b-col>
+                <p>
+                  <b-row>
+                    <b-col ><label for="textarea-small">Total money:</label></b-col>
                     <b-col>{{TotalMoney}}</b-col>
 
                 </b-row>
@@ -19,6 +21,7 @@
                     <b-col>{{TotalChips}}</b-col>
 
                 </b-row>
+                </p>
                 <b-row>
                     <b-col><label for="textarea-small">Your money:</label></b-col>
                     <b-col>{{YourMony}}</b-col>
@@ -175,3 +178,14 @@ export default {
   }
 }
 </script>
+<style>
+.ebank_info{
+  color:brown;
+}
+h3{
+  color: gold;
+}
+.ebank_info p{
+color: red;
+}
+</style>

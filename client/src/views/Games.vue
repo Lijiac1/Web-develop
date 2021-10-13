@@ -1,19 +1,19 @@
 <template>
-    <div>
+    <div class="background">
       <navagator/>
         <b-container fluied= "md">
-        <h1>Games</h1>
+        <h2>Games</h2>
 <b-row class="mt-5">
-          <b-col cols="8">Computer:</b-col>
+          <b-col class="computerColor" cols="8">Computer:</b-col>
           <b-col cols="1">{{computer_number}}</b-col>
 </b-row>
 <b-row class="mt-5">
-      <b-col cols="8">You:</b-col>
+      <b-col class="yourColor" cols="8">You:</b-col>
     <b-col cols="1"> {{your_number}} </b-col>
 </b-row>
 
   <b-row class="mt-5">
-      <b-col cols="8">Results:</b-col>
+      <b-col class="result" cols="8">Results:</b-col>
       <b-col cols="1">{{results}}</b-col>
   </b-row>
 
@@ -71,3 +71,15 @@ export default {
 }
 
 </script>
+<style>
+.computerColor{
+  color: rgb(0, 17, 255);
+}
+.yourColor{
+  color:rgb(0, 225, 255)
+}
+.result{
+  color: brown;
+}
+
+</style>
