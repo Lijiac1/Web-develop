@@ -83,6 +83,12 @@ This is a webpage that enables card games to be played, allowing users to use th
 
 ![ER Diagram](./images/group20ER.png)
 
-## UI Presentation
+## UI Presentation (For mobile)
 
-![UI Presentation](./images/group20.png)
+![UI Presentation (For mobile)](./images/yiyiyi0.png)
+
+## UI Presentation (For PC clients)
+
+![UI Presentation (For PC clients)](./images/group20.png)
+
+
