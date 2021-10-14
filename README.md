@@ -61,20 +61,28 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-Due to the impact of the current global COVID-19 epidemic, in order to let everyone enjoy the fun of “Entertainment without going out” we design this game. This system provides a place for those people who want to enjoy the “all in” pleasant sensation.Our aim is to move the traditional casino to the online digital version.And trying to create the gambaling atmosphere when people sit at home.
+This is a webpage that enables card games to be played, allowing users to use the webpage's gaming features on your device anytime, anywhere. The webpage supports user login, chip to cash conversion, saving and recording your user data in a database and single page switching. The main page has user information and game descriptions, so enjoy the game!
 
 ### Pages
 
 * Log in page: User can login to his/her own account.
-* Register page: The user who is first time come to our web page need a persional account. This page is for them to sign up an account.
-* Main page(select table): The main page shows the game tables and contain the basic information of the user, like Total chips, Total money,user's ID, User's name.
-* E-Bank page: E-bank page is for user to exchange the chips and money.
-* Game page: For user to play the game that the user choose.
+* Home page: 
+    Menu bar: at the top of the page you can switch between pages
+    Info of User: Here you can view the user's information, allow users to top up their account and delete their account.
+    Intro of Game: A brief introduction to the game.
+    Relationship: allow to post and get relationships.
+* E-Bank page: 
+    E-bank info: includes all deposits from banks and users
+    Exchange Money/Exchange Chips:Users can exchange money with E_bank here
+* Game page: 
+    Games: Numeric and alert display of game progress and results
+           Includes two buttons for game functions and an exit button
+    Chips: Select the amount of the secondary bet for the round
 
 ### Entity-Relationship (ER) Diagram
 
-![ER Diagram](./images/er_diagram.png)
+![ER Diagram](./images/group20ER.png)
 
 ## Teaser (MS3)
 
-![Teaser](./images/teaser.png)
+![Teaser](./images/group20.png)
