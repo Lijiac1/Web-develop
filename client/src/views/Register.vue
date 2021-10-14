@@ -8,7 +8,7 @@
             header-text-variant="white"
             align="center"
             tag="article"
-            style="min-width: 40rem"
+            style="min-width: 20rem"
             class="mt-5"
             >
                 <Register />
