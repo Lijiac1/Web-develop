@@ -3,7 +3,7 @@ const E_bank = require('../modules/e_bank');
 const router = express.Router();
 
 //create a general e_bank
-router.post('/v1/e_banks', function(req,res,next){
+router.post('/api/e_banks', function(req,res,next){
     let e_bank = new E_bank(req.body);
     e_bank.save(function(err){
         if(err){return next(err);}
@@ -11,7 +11,7 @@ router.post('/v1/e_banks', function(req,res,next){
     });
 });
 //returm all e_banks
-router.get('/v1/e_banks',function(req, res, next){
+router.get('/api/e_banks',function(req, res, next){
     E_bank.find(function(err,e_banks){
         if(err){return next(err);}
         res.status(200).json({'e_banks':e_banks});
@@ -19,7 +19,7 @@ router.get('/v1/e_banks',function(req, res, next){
     });
 });
 //returm e_banks with limited numbers
-router.get('/v1/e_banks?limit = 5',function(req, res, next){
+router.get('/api/e_banks?limit = 5',function(req, res, next){
     E_bank.find({}).limit(5).exec(function(err,e_banks){
         if(err){return next(err);}
         res.status(200).json({'e_banks':e_banks});
@@ -30,7 +30,7 @@ router.get('/v1/e_banks?limit = 5',function(req, res, next){
 
 
 //delete all e_banks
-router.delete('/v1/e_banks',function(req,res,next){
+router.delete('/api/e_banks',function(req,res,next){
     E_bank.remove({},function(err,e_bank){
         if(err){return next(err);}
         res.status(204).json(e_bank);
@@ -40,7 +40,7 @@ router.delete('/v1/e_banks',function(req,res,next){
 
 
 //return the e_bank with the given id
-router.get('/v1/e_banks/:id',function(req,res,next){
+router.get('/api/e_banks/:id',function(req,res,next){
     let id = req.params.id;
     E_bank.findById(id, function(err, e_bank){
         if(err){return next(err);}
@@ -53,7 +53,7 @@ router.get('/v1/e_banks/:id',function(req,res,next){
 });
 
 //update the e_bank with the given id
-router.put('/v1/e_banks/:id',function(req,res,next){
+router.put('/api/e_banks/:id',function(req,res,next){
     let id = req.params.id;
     E_bank.findById(id, function(err,e_bank){
         if(err){return next(err);}
@@ -77,7 +77,7 @@ router.put('/v1/e_banks/:id',function(req,res,next){
 
 });
 // Partially update the e_bank with the given ID
-router.patch('/v1/e_banks/:id',function(req,res,next){
+router.patch('/api/e_banks/:id',function(req,res,next){
     let id = req.params.id;
     E_bank.findById(id, function(err, e_bank){
         if(err){return next(err);}
@@ -104,7 +104,7 @@ router.patch('/v1/e_banks/:id',function(req,res,next){
     
 });
 //Delete the e_bank with the given ID
-router.delete('/v1/e_banks/:id',function(req,res,next){
+router.delete('/api/e_banks/:id',function(req,res,next){
     let id = req.params.id;
     E_bank.findByIdAndDelete(id,function(err, e_bank){
         if(err){return next(err);}
