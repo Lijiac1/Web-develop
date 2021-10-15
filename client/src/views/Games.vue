@@ -75,12 +75,12 @@ export default {
           this.your_number = Number(response.data.number)
           if (this.computer_number > this.your_number) {
             this.results = 'You Lose'
-            this.total_chips = Number(this.total_chips) + this.bet
-            this.chips = Number(this.chips) - this.bet
+            this.total_chips = Number(this.total_chips) + Number(this.bet)
+            this.chips = Number(this.chips) - Number(this.bet)
           } else if (this.computer_number < this.your_number) {
             this.results = 'You Win'
-            this.total_chips = Number(this.total_chips) - this.bet
-            this.chips = Number(this.chips) + this.bet
+            this.total_chips = Number(this.total_chips) - Number(this.bet)
+            this.chips = Number(this.chips) + Number(this.bet)
           } else {
             this.results = 'Break even'
           }
