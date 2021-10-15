@@ -46,11 +46,11 @@ app.use(e_bank);
 app.use(relationship);
 app.use(exchange);
 
-app.use('/', function(req, res) {
+// app.use('/', function(req, res) {
 
-    res.send('Welcom')
+//     res.send('Welcom')
 
-});
+// });
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function(req, res) {
