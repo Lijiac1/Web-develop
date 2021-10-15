@@ -5,7 +5,7 @@ var Game = require('../modules/game');
 
 
 //create a general game
-router.post('/api/games', function(req,res,next){
+router.post('/v1/games', function(req,res,next){
     let game = new Game(req.body);
     game.save(function(err){
         if(err){return next(err);}
@@ -14,7 +14,7 @@ router.post('/api/games', function(req,res,next){
 });
 
 //return all games
-router.get('/api/games',function(req, res, next){
+router.get('/v1/games',function(req, res, next){
     Game.find(function(err,games){
         if(err){return next(err);}
         res.status(200).json({'games':games});
@@ -22,7 +22,7 @@ router.get('/api/games',function(req, res, next){
     });
 });
 //delete all games
-router.delete('/api/games',function(req,res,next){
+router.delete('/v1/games',function(req,res,next){
     Game.remove({},function(err,game){
         if(err){return next(err);}
         res.status(204).json(game);
@@ -31,7 +31,7 @@ router.delete('/api/games',function(req,res,next){
 })
 
 //return the game with the given id
-router.get('/api/games/:id',function(req,res,next){
+router.get('/v1/games/:id',function(req,res,next){
     let id = req.params.id;
     Game.findById(id, function(err, game){
         if(err){return next(err);}
@@ -44,7 +44,7 @@ router.get('/api/games/:id',function(req,res,next){
 });
 
 //update the game with the given id
-router.put('/api/games/:id',function(req,res,next){
+router.put('/v1/games/:id',function(req,res,next){
     let id = req.params.id;
     Game.findById(id, function(err,game){
         if(err){return next(err);}
@@ -62,7 +62,7 @@ router.put('/api/games/:id',function(req,res,next){
 
 
 //Partially update the game with the given ID
-router.patch('/api/games/:id',function(req,res,next){
+router.patch('/v1/games/:id',function(req,res,next){
     let id = req.params.id;
     Game.findById(id, function(err, games){
         if(err){return next(err);}
@@ -80,7 +80,7 @@ router.patch('/api/games/:id',function(req,res,next){
 });
 
 //Delete the game with the given ID
-router.delete('/api/games/:id',function(req,res,next){
+router.delete('/v1/games/:id',function(req,res,next){
     let id = req.params.id;
     Game.findByIdAndDelete(id,function(err, game){
         if(err){return next(err);}
@@ -93,7 +93,7 @@ router.delete('/api/games/:id',function(req,res,next){
 
 });
 
-router.get('/api/games_random',function(req,res,next){
+router.get('/v1/games_random',function(req,res,next){
     let num = getRndInteger(1,13);
     res.json({number : num})
 })
