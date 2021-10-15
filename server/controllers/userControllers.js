@@ -3,7 +3,7 @@ const User = require('../modules/user');
 const router = express.Router();
 
 // create a user with given information
-router.post('/api/users',function(req,res,next){
+router.post('/v1/users',function(req,res,next){
     let user = new User(req.body);
     user.save(function(err){
         if(err){return next(err);}
@@ -12,7 +12,7 @@ router.post('/api/users',function(req,res,next){
     
 });
 // return all users
-router.get('/api/users',function(req,res,next){
+router.get('/v1/users',function(req,res,next){
     User.find(function(err,users){
         if(err){return next(err);}
         res.json({'users':users});
@@ -20,7 +20,7 @@ router.get('/api/users',function(req,res,next){
     });
 });
 
-router.get('/api/users/username/:username', function(req,res,next){
+router.get('/v1/users/username/:username', function(req,res,next){
     let userName = req.params.username;
     User.findOne({username: userName},function(err,user){
         if(err){return next(err);}
@@ -31,14 +31,14 @@ router.get('/api/users/username/:username', function(req,res,next){
 });
 
 // delete all users
-router.delete('/api/users',function(req,res,next){
+router.delete('/v1/users',function(req,res,next){
     User.remove({},function(err,user){
         if(err){return next(err);}
         res.status(204).json(user);
     })
 });
 // return a user with a given id
-router.get('/api/users/:id',function(req,res,next){
+router.get('/v1/users/:id',function(req,res,next){
     let id = req.params.id;
     User.findById(id, function(err, user){
         if(err){return next(err);}
@@ -50,7 +50,7 @@ router.get('/api/users/:id',function(req,res,next){
     
 });
 // Update the user with the given ID
-router.put('/api/users/:id',function(req,res,next){
+router.put('/v1/users/:id',function(req,res,next){
     let id = req.params.id;
     User.findById(id, function(err,user){
         if(err){return next(err);}
@@ -72,7 +72,7 @@ router.put('/api/users/:id',function(req,res,next){
 });
 
 // Partially update the user with the given ID
-router.patch('/api/users/:id',function(req,res,next){
+router.patch('/v1/users/:id',function(req,res,next){
     let id = req.params.id;
     User.findById(id, function(err, user){
         if(err){return next(err);}
@@ -96,7 +96,7 @@ router.patch('/api/users/:id',function(req,res,next){
 });
 
 //Delete the user with the given ID
-router.delete('/api/users/:id',function(req,res,next){
+router.delete('/v1/users/:id',function(req,res,next){
     let id = req.params.id;
     User.findByIdAndDelete(id,function(err, user){
         if(err){return next(err);}

@@ -7,7 +7,7 @@ const User = require('../modules/user');
 
 
 //Create a users with a given  e_bank_id
-router.post('/api/e_banks/:e_bank_id/users',function(req,res,next){
+router.post('/v1/e_banks/:e_bank_id/users',function(req,res,next){
     let e_bank_id = req.params.e_bank_id;
     let user = new User(req.body);
     E_bank.findById(e_bank_id, function(err, e_bank){
@@ -23,7 +23,7 @@ router.post('/api/e_banks/:e_bank_id/users',function(req,res,next){
 
 });
 //return all users under a specific e_bank
-router.get('/api/e_banks/:e_bank_id/users',function(req,res,next){
+router.get('/v1/e_banks/:e_bank_id/users',function(req,res,next){
     let e_bank_id = req.params.e_bank_id;
     E_bank.findById(e_bank_id, function(err, e_bank){
         if(err){return next(err);}
@@ -32,7 +32,7 @@ router.get('/api/e_banks/:e_bank_id/users',function(req,res,next){
 
 });
 
-router.get('/api/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
+router.get('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
     let e_bank_id = req.params.e_bank_id;
     let user_id = req.params.user_id;
     E_bank.findById(e_bank_id, function(err, e_bank){
@@ -48,7 +48,7 @@ router.get('/api/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
 });
 
 
-router.delete('/api/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
+router.delete('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
     let user_id = req.params.user_id;
     User.findByIdAndDelete(user_id, function(err){
         if (err){
