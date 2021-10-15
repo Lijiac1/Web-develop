@@ -46,11 +46,7 @@ app.use(e_bank);
 app.use(relationship);
 app.use(exchange);
 
-// app.use('/', function(req, res) {
 
-//     res.send('Welcom')
-
-// });
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/v1/*', function(req, res) {
@@ -65,6 +61,11 @@ var root = path.normalize(__dirname + '/..');
 var client = path.join(root, 'client', 'dist');
 app.use(express.static(client));
 
+app.use('/', function(req, res) {
+
+    res.send('Welcom')
+
+});
 // Error handler (i.e., when exception is thrown) must be registered last
 var env = app.get('env');
 // eslint-disable-next-line no-unused-vars
