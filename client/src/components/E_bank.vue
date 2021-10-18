@@ -89,6 +89,7 @@ export default {
       Cookies.set('chips', response.data.chips)
       Cookies.set('money', response.data.money)
     }).catch(error => {
+      alert('Backend error')
       console.log(error)
     })
 
@@ -99,6 +100,7 @@ export default {
       Cookies.set('e_bank_id', this.e_bank_id)
       Cookies.set('total_chips', this.TotalChips)
     }).catch(error => {
+      alert('Backend error')
       console.error(error)
     })
   },

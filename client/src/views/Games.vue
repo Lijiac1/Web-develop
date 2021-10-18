@@ -85,6 +85,7 @@ export default {
             this.results = 'Break even'
           }
         }).catch(error => {
+          alert('Backend error')
           console.error(error)
         }).then(() => {
           this.bet = 0

@@ -52,6 +52,7 @@ export default {
     Api.get('/e_banks').then(response => {
       this.e_bank_id = response.data.e_banks[1]._id
     }).catch(error => {
+      alert('Backend error')
       console.error(error)
     })
     Cookies.set('e_bank_id', this.e_bank_id)
@@ -69,6 +70,7 @@ export default {
         this.money = response.data.money
         Cookies.set('money', response.data.money)
       }).catch(error => {
+        alert('Backend error')
         console.error(error)
       })
     },
@@ -76,6 +78,7 @@ export default {
       Api.delete('/users').then(response => {
         this.$router.push('/')
       }).catch(error => {
+        alert('Backend error')
         console.error(error)
       })
     },
@@ -83,6 +86,7 @@ export default {
       Api.delete(`/users/${this.user_id}`).then(response => {
         this.$router.push('/')
       }).catch(error => {
+        alert('Backend error')
         console.error(error)
       })
     },
@@ -97,16 +101,19 @@ export default {
 
       }
       Api.post(`/e_banks/${this.e_bank_id}/users`, u).then(response => {
+        console.log(response.data)
       }).catch(error => {
+        alert('Backend error')
         console.error(error)
       })
-    },
+    }, // this is for complete the requirement
     getRelationship() {
       Api.get(`/e_banks/${this.e_bank_id}/users`).then(response => {
         this.relationship = response.data
       }).catch(error => {
+        alert('Backend error')
         console.error(error)
-      })
+      }) // this is for complete the requirement
     }
 
   }

@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <b-form v-if="show">
+    <b-form>
       <b-form-group
         id="input-group-1"
         label="Username: "
@@ -66,21 +66,19 @@ export default {
         name: '',
         chips: 0,
         money: 0
-      },
-      show: true
+      }
     }
   },
   methods: {
     onSubmit(event) {
-      if ((this.form.username !== '') && (this.form.name !== '') && (this.form.password != null)) {
-        alert('Register successfully')
-
-        Api.post('/users', this.form).then(response => {
-          console.log(response)
-        }).catch(error => {
-          console.error(error)
-        })
-      }
+      event.preventDefault()
+      Api.post('/users', this.form).then(response => {
+        if (response === 201) { alert('Register successfully') }
+        console.log(response)
+      }).catch(error => {
+        alert('Backend error')
+        console.error(error)
+      })
     }
   }
 }

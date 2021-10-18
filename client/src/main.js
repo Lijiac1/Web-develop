@@ -9,6 +9,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
+Vue.config.errorHandler = (msg, vm, info) => {
+  alert(msg)
+}
 
 new Vue({
   router,
