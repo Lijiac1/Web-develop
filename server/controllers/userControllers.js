@@ -19,6 +19,14 @@ router.get('/v1/users',function(req,res,next){
         res.status(200);
     });
 });
+router.post('/v1/users/login',function(req,res,next){
+    User.findOne({username: req.body.username, password: req.body.password},function(err,user){
+        if(err){return next(err);}
+        if(!user){res.status(404)}
+        res.json(user);
+        res.status(200);
+    })
+})
 
 router.get('/v1/users/username/:username', function(req,res,next){
     let userName = req.params.username;
@@ -67,9 +75,26 @@ router.put('/v1/users/:id',function(req,res,next){
         ;
 
     });
-
-
 });
+router.put('/v1/users/topup/:id',function(req,res,next){
+    let id = req.params.id;
+    User.findById(id, function(err,user){
+        if(err){return next(err);}
+        if(user == null){
+            return res.status(404).json({'user':'not registered'});
+        }
+        user.money = Number(req.body.money) + 1000;
+        user.chips = req.body.chips;
+        user.e_bank_id = (req.body.e_bank_id || user.e_bank_id);
+        user.save(function(err){
+            if(err){return next(err);}
+            res.status(201).json(user)
+        });
+        ;
+
+    });
+});
+
 
 // Partially update the user with the given ID
 router.patch('/v1/users/:id',function(req,res,next){

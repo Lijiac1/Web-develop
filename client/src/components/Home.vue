@@ -16,7 +16,7 @@
       </b-col>
       <b-col>
          <b-card id="card" title="Intro of Game">
-<b-text id= "text"> The player take a card,compare with the card that the computer got, the bigger one win.</b-text>
+<text id= "text"> The player take a card,compare with the card that the computer got, the bigger one win.</text>
          </b-card>
          <b-card title="Relationship">
           <b-row>
@@ -59,15 +59,15 @@ export default {
   methods: {
 
     topup(event) {
-      this.money = Number(this.money) + 10000
-      Cookies.set('money', this.money)
       const u = {
         money: this.money,
         chips: this.chips,
         e_bank_id: this.e_bank_id
       }
-      Api.put(`/users/${this.user_id}`, u).then(response => {
+      Api.put(`/users/topup/${this.user_id}`, u).then(response => {
         console.log(response)
+        this.money = response.data.money
+        Cookies.set('money', response.data.money)
       }).catch(error => {
         console.error(error)
       })
