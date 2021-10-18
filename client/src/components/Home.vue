@@ -90,23 +90,23 @@ export default {
         console.error(error)
       })
     },
-    postRelationship() {
-      const u = {
-        username: 'test',
-        password: 123,
-        name: 'test',
-        money: 0,
-        chips: 0,
-        e_bank_id: null
+    // postRelationship() {
+    //   const u = {
+    //     username: 'test',
+    //     password: 123,
+    //     name: 'test',
+    //     money: 0,
+    //     chips: 0,
+    //     e_bank_id: null
 
-      }
-      Api.post(`/e_banks/${this.e_bank_id}/users`, u).then(response => {
-        console.log(response.data)
-      }).catch(error => {
-        alert('Backend error')
-        console.error(error)
-      })
-    }, // this is for complete the requirement
+    //   }
+    //   Api.post(`/e_banks/${this.e_bank_id}/users`, u).then(response => {
+    //     console.log(response.data)
+    //   }).catch(error => {
+    //     alert('Backend error')
+    //     console.error(error)
+    //   })
+    // }, // this is for complete the requirement
     getRelationship() {
       Api.get(`/e_banks/${this.e_bank_id}/users`).then(response => {
         this.relationship = response.data

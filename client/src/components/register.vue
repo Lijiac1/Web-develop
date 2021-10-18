@@ -46,6 +46,7 @@
             >
             <center>
             <b-button type="submit" variant="outline-primary" @click="onSubmit" >Submit</b-button>
+            <b-button type="submit" variant="outline-primary" @click="postRelationship">Submit2</b-button>
       </center>
       </p>
     </b-form>
@@ -66,8 +67,17 @@ export default {
         name: '',
         chips: 0,
         money: 0
-      }
+      },
+      e_bank_id: null
     }
+  },
+  mounted() {
+    Api.get('/e_banks').then(response => {
+      this.e_bank_id = response.data.e_banks[1]._id
+    }).catch(error => {
+      alert('Backend error')
+      console.error(error)
+    })
   },
   methods: {
     onSubmit(event) {
@@ -75,6 +85,16 @@ export default {
       Api.post('/users', this.form).then(response => {
         if (response === 201) { alert('Register successfully') }
         console.log(response)
+      }).catch(error => {
+        alert('Backend error')
+        console.error(error)
+      })
+    },
+    postRelationship(event) {
+      event.preventDefault()
+      Api.post(`/e_banks/${this.e_bank_id}/users`, this.form).then(response => {
+        if (response === 201) { alert('Register successfully') }
+        console.log(response.data)
       }).catch(error => {
         alert('Backend error')
         console.error(error)
