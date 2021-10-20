@@ -61,11 +61,11 @@ export default {
           Cookies.set('islogin', this.islogin)
           this.$router.push('/home')
         } else {
-          alert('Wrong password or username')
+          alert('Wrong password or username or backend error')
         }
       }).catch(error => {
         console.log(error)
-        alert('Backend error')
+        alert('Wrong password or username or backend error')
       })
     }
   }

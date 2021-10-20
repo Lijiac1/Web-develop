@@ -22,7 +22,6 @@
           <b-row>
           <b-col cols="10">Relation:{{relationship}}</b-col>
           </b-row>
-          <b-button class = "mt-2" variant="outline-primary" @click="postRelationship">Post relationship</b-button>
           <b-button class = "mt-2" variant="outline-primary" @click="getRelationship">Get relationship</b-button>
         </b-card>
       </b-col>
