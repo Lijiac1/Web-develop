@@ -16,7 +16,7 @@
       </b-col>
       <b-col>
          <b-card id="card" title="Intro of Game">
-<text id= "text"> The player take a card,compare with the card that the computer got, the bigger one win.</text>
+<p id= "text"> The player take a card,compare with the card that the computer got, the bigger one win.</p>
          </b-card>
          <b-card title="Relationship">
           <b-row>
