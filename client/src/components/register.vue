@@ -83,7 +83,7 @@ export default {
     onSubmit(event) {
       event.preventDefault()
       Api.post('/users', this.form).then(response => {
-        if (response === 201) { alert('Register successfully') }
+        if (response.status === 201) { alert('Register successfully') }
         console.log(response)
       }).catch(error => {
         alert('Backend error')
@@ -93,7 +93,7 @@ export default {
     postRelationship(event) {
       event.preventDefault()
       Api.post(`/e_banks/${this.e_bank_id}/users`, this.form).then(response => {
-        if (response === 201) { alert('Register successfully') }
+        if (response.status === 201) { alert('Register successfully') }
         console.log(response.data)
       }).catch(error => {
         alert('Backend error')

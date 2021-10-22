@@ -10,17 +10,11 @@ router.post('/v1/e_banks', function(req,res,next){
         res.status(201).json(e_bank);
     });
 });
-//returm all e_banks
-router.get('/v1/e_banks',function(req, res, next){
-    E_bank.find(function(err,e_banks){
-        if(err){return next(err);}
-        res.status(200).json({'e_banks':e_banks});
 
-    });
-});
-//returm e_banks with limited numbers
-router.get('/v1/e_banks?limit = 5',function(req, res, next){
-    E_bank.find({}).limit(5).exec(function(err,e_banks){
+router.get('/v1/e_banks',function(req, res, next){
+    const limit = +req.query.limit
+    console.log(limit)
+    E_bank.find({}).limit(limit).exec(function(err,e_banks){
         if(err){return next(err);}
         res.status(200).json({'e_banks':e_banks});
 
