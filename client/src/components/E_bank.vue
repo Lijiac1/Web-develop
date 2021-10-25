@@ -59,7 +59,12 @@
         ></b-form-input></b-col>
         <b-col><b-col><b-button variant="outline-primary" @click="exchangeChips">Exchange</b-button></b-col></b-col>
         </b-row>
-
+        <b-card title="Relationship" class = "mt-2">
+          <b-row>
+          <b-col>Relation:{{relationship}}</b-col>
+          </b-row>
+          <b-button class = "mt-2" variant="outline-primary" @click="getRelationship">Get relationship</b-button>
+        </b-card>
     </b-container>
 </template>
 
@@ -77,7 +82,8 @@ export default {
       user_id: null,
       e_bank_id: null,
       exchange_chips: 0,
-      exchange_money: 0
+      exchange_money: 0,
+      relationship: null
 
     }
   },
@@ -179,6 +185,14 @@ export default {
         console.error(error)
       })
       this.exchange_chips = 0
+    },
+    getRelationship() {
+      Api.get(`/e_banks/${this.e_bank_id}/users`).then(response => {
+        this.relationship = response.data
+      }).catch(error => {
+        alert('Backend error')
+        console.error(error)
+      }) // this is for complete the requirement
     }
 
   }

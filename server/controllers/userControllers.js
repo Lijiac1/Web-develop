@@ -13,7 +13,8 @@ router.post('/v1/users',function(req,res,next){
 });
 // return all users
 router.get('/v1/users',function(req,res,next){
-    User.find(function(err,users){
+    const limit = +req.query.limit
+    User.find({}).limit(limit).exec(function(err,users){
         if(err){return next(err);}
         res.json({'users':users});
         res.status(200);

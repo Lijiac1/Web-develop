@@ -18,12 +18,6 @@
          <b-card id="card" title="Intro of Game">
 <p id= "text"> The player take a card,compare with the card that the computer got, the bigger one win.</p>
          </b-card>
-         <b-card title="Relationship">
-          <b-row>
-          <b-col cols="10">Relation:{{relationship}}</b-col>
-          </b-row>
-          <b-button class = "mt-2" variant="outline-primary" @click="getRelationship">Get relationship</b-button>
-        </b-card>
       </b-col>
       </b-row>
 
@@ -42,8 +36,7 @@ export default {
       username: Cookies.get('username'),
       money: Cookies.get('money'),
       chips: Cookies.get('chips'),
-      e_bank_id: null,
-      relationship: null
+      e_bank_id: null
 
     }
   },
@@ -88,31 +81,6 @@ export default {
         alert('Backend error')
         console.error(error)
       })
-    },
-    // postRelationship() {
-    //   const u = {
-    //     username: 'test',
-    //     password: 123,
-    //     name: 'test',
-    //     money: 0,
-    //     chips: 0,
-    //     e_bank_id: null
-
-    //   }
-    //   Api.post(`/e_banks/${this.e_bank_id}/users`, u).then(response => {
-    //     console.log(response.data)
-    //   }).catch(error => {
-    //     alert('Backend error')
-    //     console.error(error)
-    //   })
-    // }, // this is for complete the requirement
-    getRelationship() {
-      Api.get(`/e_banks/${this.e_bank_id}/users`).then(response => {
-        this.relationship = response.data
-      }).catch(error => {
-        alert('Backend error')
-        console.error(error)
-      }) // this is for complete the requirement
     }
 
   }
