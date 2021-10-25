@@ -63,6 +63,13 @@
           <b-row>
           <b-col>Relation:{{relationship}}</b-col>
           </b-row>
+          <div>
+            <b-button-group vertical>
+              <b-button>Top</b-button>
+                <b-button>Middle</b-button>
+              <b-button>Bottom</b-button>
+            </b-button-group>
+          </div>
           <b-button class = "mt-2" variant="outline-primary" @click="getRelationship">Get relationship</b-button>
         </b-card>
     </b-container>
