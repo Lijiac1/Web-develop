@@ -13,7 +13,6 @@ router.post('/v1/e_banks', function(req,res,next){
 
 router.get('/v1/e_banks',function(req, res, next){
     const limit = +req.query.limit
-    console.log(limit)
     E_bank.find({}).limit(limit).exec(function(err,e_banks){
         if(err){return next(err);}
         res.status(200).json({'e_banks':e_banks});

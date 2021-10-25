@@ -1,5 +1,4 @@
 const express = require('express');
-const e_bank = require('../modules/e_bank');
 const router = express.Router();
 const E_bank = require('../modules/e_bank');
 const User = require('../modules/user');
