@@ -15,8 +15,13 @@
 							"    pm.test('creat a user',()=>{",
 							"        pm.response.to.have.status(201)",
 							"    })",
+							"    pm.test('check the password', ()=>{",
+							"        pm.expect(pm.response.json().password).to.equal('123')",
+							"    } )",
 							"    const jsonData = pm.response.json();",
 							"    pm.environment.set('userId',jsonData._id)",
+							"    console.log(pm.environment.get('userId'))",
+							"    ",
 							""
 						],
 						"type": "text/javascript"
@@ -163,7 +168,8 @@
 							"        pm.response.to.have.status(201)",
 							"    })",
 							"    const jsonData = pm.response.json();",
-							"    pm.environment.set('eBankId',jsonData._id)"
+							"    pm.environment.set('eBankId',jsonData._id)",
+							"    console.log(pm.environment.get('userId'))"
 						],
 						"type": "text/javascript"
 					}
@@ -744,38 +750,6 @@
 			"response": []
 		},
 		{
-			"name": "e_banks/:id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test('delet eBankId',()=>{",
-							"        pm.response.to.have.status(204)",
-							"    })"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{host}}/v1/e_banks/{{eBankId}}",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"v1",
-						"e_banks",
-						"{{eBankId}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "e_banks/:e_bank_id/users/:user_id",
 			"event": [
 				{
@@ -810,6 +784,38 @@
 			"response": []
 		},
 		{
+			"name": "e_banks/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('delet eBankId',()=>{",
+							"        pm.response.to.have.status(204)",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/v1/e_banks/{{eBankId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v1",
+						"e_banks",
+						"{{eBankId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "users Copy",
 			"event": [
 				{
@@ -819,8 +825,13 @@
 							"    pm.test('creat a user',()=>{",
 							"        pm.response.to.have.status(201)",
 							"    })",
+							"    pm.test('check the password', ()=>{",
+							"        pm.expect(pm.response.json().password).to.equal('123')",
+							"    } )",
 							"    const jsonData = pm.response.json();",
 							"    pm.environment.set('userId',jsonData._id)",
+							"    console.log(pm.environment.get('userId'))",
+							"    ",
 							""
 						],
 						"type": "text/javascript"

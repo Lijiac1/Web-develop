@@ -31,6 +31,15 @@ router.get('/v1/e_banks/:e_bank_id/users',function(req,res,next){
 
 });
 
+router.get('/v1/e_banks/:e_bank_id/users/name',function(req,res,next){
+    let e_bank_id = req.params.e_bank_id;
+    E_bank.findOne({'_id':e_bank_id}).populate('user_id').exec(function(err, e_bank){
+        if(err){return next(err);}
+        res.status(200).json(e_bank.user_id);
+    });
+
+});
+
 router.get('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
     let e_bank_id = req.params.e_bank_id;
     let user_id = req.params.user_id;
@@ -49,13 +58,23 @@ router.get('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
 
 router.delete('/v1/e_banks/:e_bank_id/users/:user_id',function(req,res,next){
     let user_id = req.params.user_id;
-    User.findByIdAndDelete(user_id, function(err){
-        if (err){
-            res.status(404).send(err);
-        }else{
-            res.status(204).send("Deleted!");
-        }
-    });
+    let e_bank_id = req.params.e_bank_id
+    E_bank.findById(e_bank_id, function(err, e_bank){
+        if(err || e_bank == null){
+            return next(err);}
+        e_bank.user_id = e_bank.user_id.filter(id=>id!=user_id)
+        e_bank.save()
+        User.findByIdAndDelete(user_id, function(err,user){
+            if (err){
+                return next(err);
+            }else{
+                if(user != null){res.status(204).json(e_bank);}
+                else{
+                    return next(err);}
+            }
+        });
+    })
+    
 });
 
 module.exports = router;

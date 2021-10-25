@@ -4,11 +4,17 @@ const router = express.Router();
 
 // create a user with given information
 router.post('/v1/users',function(req,res,next){
-    let user = new User(req.body);
-    user.save(function(err){
+    let user = null;
+    user = new User(req.body);
+    try {
+        user.save(function(err){
         if(err){return next(err);}
         res.status(201).json(user);
-    });
+        });
+    } catch (error) {
+        return next(error)
+    }
+    
     
 });
 // return all users
