@@ -33,7 +33,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"account_id\" : 123,\r\n    \"password\" : 123,\r\n    \"name\" : \"test\",\r\n    \"chips\" : 0,\r\n    \"money\" : 0\r\n\r\n}",
+					"raw": "{\r\n    \"username\" : 123,\r\n    \"password\" : 123,\r\n    \"name\" : \"test\",\r\n    \"chips\" : 0,\r\n    \"money\" : 0\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -304,7 +304,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"account_id\" : 123,\n    \"password\" : 123,\n    \"name\" : \"test\",\n    \"chips\" : 0,\n    \"money\" : 0\n}",
+					"raw": "{\n    \"username\" : 456,\n    \"password\" : 123,\n    \"name\" : \"test\",\n    \"chips\" : 0,\n    \"money\" : 0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
