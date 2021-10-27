@@ -5,6 +5,7 @@ import Login from './views/Login.vue'
 import Ebank from './views/E_bank.vue'
 import Games from './views/Games.vue'
 import Register from './views/Register.vue'
+import Admin from './views/Admin.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,12 @@ export default new Router({
       path: '/Register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/Admin',
+      name: 'admin',
+      component: Admin
+
     }
 
   ]
