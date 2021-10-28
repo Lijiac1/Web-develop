@@ -45,8 +45,8 @@
               >click here</router-link
             >
             <center>
-            <b-button type="submit" variant="outline-primary" @click="onSubmit" >Submit</b-button>
-            <b-button type="submit" variant="outline-primary" @click="postRelationship">Submit2</b-button>
+            <!-- <b-button type="submit" variant="outline-primary" @click="onSubmit" >Submit</b-button> -->
+            <b-button type="submit" variant="outline-primary" @click="postRelationship">Submit</b-button>
       </center>
       </p>
     </b-form>
@@ -73,23 +73,23 @@ export default {
   },
   mounted() {
     Api.get('/e_banks').then(response => {
-      this.e_bank_id = response.data.e_banks[1]._id
+      this.e_bank_id = response.data.e_banks[response.data.e_banks.length - 1]._id
     }).catch(error => {
       alert('Backend error')
       console.error(error)
     })
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault()
-      Api.post('/users', this.form).then(response => {
-        if (response.status === 201) { alert('Register successfully') }
-        console.log(response)
-      }).catch(error => {
-        alert('Backend error')
-        console.error(error)
-      })
-    },
+    // onSubmit(event) {
+    //   event.preventDefault()
+    //   Api.post('/users', this.form).then(response => {
+    //     if (response.status === 201) { alert('Register successfully') }
+    //     console.log(response)
+    //   }).catch(error => {
+    //     alert('Backend error')
+    //     console.error(error)
+    //   })
+    // },
     postRelationship(event) {
       event.preventDefault()
       Api.post(`/e_banks/${this.e_bank_id}/users`, this.form).then(response => {
