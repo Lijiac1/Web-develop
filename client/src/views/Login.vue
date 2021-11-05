@@ -53,13 +53,17 @@ export default {
     login(event) {
       Api.post('/users/login', { username: this.form[0].value, password: this.form[1].value }).then(response => {
         if (response.status === 200) {
-          this.islogin = true
-          Cookies.set('_id', response.data._id)
-          Cookies.set('username', response.data.username)
-          Cookies.set('chips', response.data.chips)
-          Cookies.set('money', response.data.money)
-          Cookies.set('islogin', this.islogin)
-          this.$router.push('/home')
+          if (response.data.username === 'admin') {
+            this.$router.push('/Admin')
+          } else {
+            this.islogin = true
+            Cookies.set('_id', response.data._id)
+            Cookies.set('username', response.data.username)
+            Cookies.set('chips', response.data.chips)
+            Cookies.set('money', response.data.money)
+            Cookies.set('islogin', this.islogin)
+            this.$router.push('/home')
+          }
         } else {
           alert('Wrong password or username or backend error')
         }

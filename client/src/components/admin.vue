@@ -20,7 +20,7 @@
                 header-text-variant="white"
                 style="position:relative; height: 234px; overflow-y:scroll;"
                 >
-                <b-row v-for="eBank in eBanks" :key="eBank.id">
+                <b-row v-for="eBank in eBanks" :key="eBank._id">
                   <b-col>{{eBank.total_money}}</b-col>
                   <b-col>{{eBank.total_chips}}</b-col>
                   <b-col>{{eBank.money_in}}</b-col>
@@ -28,8 +28,22 @@
                   <b-col>{{eBank.chips_in}}</b-col>
                   <b-col>{{eBank.chips_out}}</b-col>
                   <b-col><b-button variant="outline-primary" @click="select(eBank._id)">Select</b-button></b-col>
-                  <b-col><b-button variant="outline-primary" @click="checkUsers(eBank._id)">Users</b-button></b-col>
+                  <b-col><b-button variant="outline-primary" v-b-modal.checkUser @click="checkUsers(eBank._id)">Users</b-button></b-col>
                 </b-row>
+                <b-modal id="checkUser" ok-only>
+                  <b-row id="title">
+                    <b-col>Name</b-col>
+                    <b-col>Chips</b-col>
+                    <b-col>Money</b-col>
+                    <b-col></b-col>
+                  </b-row>
+                  <b-row v-for="user in users" :key="user._id">
+                    <b-col>{{user.username}}</b-col>
+                    <b-col>{{user.chips}}</b-col>
+                    <b-col>{{user.money}}</b-col>
+                    <b-col><b-button variant="danger" size="sm" @click="deleteUser(user._id)">Delete</b-button></b-col>
+                  </b-row>
+                </b-modal>
                 </b-card>
               </b-card>
             </b-col>
@@ -96,7 +110,7 @@
             <b-col>
         <b-card title="Create ebank" class = "mt-2" align-v="center">
           <b-row>
-          <b-col>TotalMoney:{{relationship}}</b-col><b-col><b-form-input
+          <b-col>TotalMoney:</b-col><b-col><b-form-input
           id="input-2"
           type="number"
           min="0"
@@ -104,7 +118,7 @@
         ></b-form-input></b-col>
           </b-row>
           <b-row>
-                <b-col>TotalChips:{{relationship}}</b-col><b-col><b-form-input
+                <b-col>TotalChips:</b-col><b-col><b-form-input
           id="input-2"
           type="number"
           min="0"
@@ -140,6 +154,7 @@ export default {
       ChipsIn: 0,
       ChipsOut: 0,
       eBank_id: null,
+      ebankIdForUser: null,
       users: [],
       eBanks: []
 
@@ -219,14 +234,33 @@ export default {
         this.TotalChips = response.data.total_chips
         this.TotalMoneyInput = response.data.money_in
         this.TotalChipsInput = response.data.money_out
+      }).catch(error => {
+        console.log(error)
       })
     },
     checkUsers(ebankid) {
+      this.ebankIdForUser = ebankid
       Api.get(`/e_banks/${ebankid}/users/name`).then(response => {
-        this.users = JSON.stringify(response.data)
-        alert(this.users)
+        this.users = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    deleteUser(userid) {
+      Api.delete(`/e_banks/${this.ebankIdForUser}/users/${userid}`).then(response => {
+        console.log(response.status)
+        return this.checkUsers(this.ebankIdForUser)
+      }).catch(error => {
+        console.log(error)
       })
     }
   }
 }
 </script>
+<style scoped>
+
+#title{color: orange;
+  font-family:monospace;
+  font-style:italic;}
+
+</style>
