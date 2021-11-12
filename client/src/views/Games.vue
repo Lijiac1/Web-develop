@@ -94,6 +94,21 @@ export default {
         this.computer_number = 0
         this.your_number = 0
         this.rounds = this.rounds + 1
+
+        Cookies.set('total_chips', this.total_chips)
+        Cookies.set('chips', this.chips)
+        Api.put(`/users/${Cookies.get('_id')}`, { money: this.money, chips: this.chips }).then(response => {
+        }).catch(error => {
+          console.error(error)
+        })
+        Api.patch(`/e_banks/${Cookies.get('e_bank_id')}`, { total_chips: this.total_chips }).then(response => {
+        }).catch(error => {
+          console.error(error)
+        })
+        Api.post('/games', { name: this.name, rounds: this.rounds }).then(response => {
+        }).catch(error => {
+          console.error(error)
+        })
       } else {
         alert('Please bet')
       }

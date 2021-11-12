@@ -76,11 +76,11 @@ export default {
   data() {
     return {
       TotalMoney: 0,
-      TotalChips: 0,
-      YourMony: 0,
-      YourChips: 0,
-      user_id: null,
-      e_bank_id: null,
+      TotalChips: Cookies.get('total_chips'),
+      YourMony: Cookies.get('money'),
+      YourChips: Cookies.get('chips'),
+      user_id: Cookies.get('_id'),
+      e_bank_id: Cookies.get('e_bank_id'),
       exchange_chips: 0,
       exchange_money: 0,
       relationship: null
@@ -88,9 +88,6 @@ export default {
     }
   },
   mounted() {
-    this.YourMony = Cookies.get('money')
-    this.YourChips = Cookies.get('chips')
-    this.user_id = Cookies.get('_id')
     Api.get(`/users/${this.user_id}`).then(response => {
       Cookies.set('chips', response.data.chips)
       Cookies.set('money', response.data.money)
@@ -99,11 +96,9 @@ export default {
       console.log(error)
     })
 
-    Api.get('/e_banks').then(response => {
-      this.TotalMoney = response.data.e_banks[1].total_money
-      this.TotalChips = response.data.e_banks[1].total_chips
-      this.e_bank_id = response.data.e_banks[1]._id
-      Cookies.set('e_bank_id', this.e_bank_id)
+    Api.get(`/e_banks/${this.e_bank_id}`).then(response => {
+      this.TotalMoney = response.data.total_money
+      this.TotalChips = response.data.total_chips
       Cookies.set('total_chips', this.TotalChips)
     }).catch(error => {
       alert('Backend error')

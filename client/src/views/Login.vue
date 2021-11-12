@@ -62,6 +62,7 @@ export default {
             Cookies.set('chips', response.data.chips)
             Cookies.set('money', response.data.money)
             Cookies.set('islogin', this.islogin)
+            Cookies.set('e_bank_id', response.data.e_bank_id)
             this.$router.push('/home')
           }
         } else {

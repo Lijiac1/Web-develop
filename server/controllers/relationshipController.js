@@ -15,6 +15,7 @@ router.post('/v1/e_banks/:e_bank_id/users',function(req,res,next){
         e_bank.user_id.push(user._id);
         e_bank.save()
     });
+    user.e_bank_id = e_bank_id
     user.save(function(err){
         if(err){return next(err);}
         res.status(201).json(user);

@@ -36,18 +36,9 @@ export default {
       username: Cookies.get('username'),
       money: Cookies.get('money'),
       chips: Cookies.get('chips'),
-      e_bank_id: null
+      e_bank_id: Cookies.get('e_bank_id')
 
     }
-  },
-  mounted() {
-    Api.get('/e_banks').then(response => {
-      this.e_bank_id = response.data.e_banks[1]._id
-    }).catch(error => {
-      alert('Backend error')
-      console.error(error)
-    })
-    Cookies.set('e_bank_id', this.e_bank_id)
   },
   methods: {
 
