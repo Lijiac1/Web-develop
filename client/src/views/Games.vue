@@ -26,6 +26,10 @@
     <b-col cols="8">Your bets:</b-col>
     <b-col cols="1">{{bet}}</b-col>
   </b-row>
+  <b-row class="mt-5">
+    <b-col cols="8">Rounds:</b-col>
+    <b-col cols="1">{{rounds}}</b-col>
+  </b-row>
 
   <b-row class="mt-5">
     <b-col><b-button variant="outline-primary" @click="takeAnumber">Take card</b-button></b-col>
@@ -89,26 +93,21 @@ export default {
           console.error(error)
         }).then(() => {
           this.bet = 0
+          this.chipsOn = false
+          this.rounds = this.rounds + 1
+          Cookies.set('total_chips', this.total_chips)
+          Cookies.set('chips', this.chips)
+          Api.put(`/users/${Cookies.get('_id')}`, { money: this.money, chips: this.chips }).then(response => {
+          }).catch(error => {
+            console.error(error)
+          })
+          Api.patch(`/e_banks/${Cookies.get('e_bank_id')}`, { total_chips: this.total_chips }).then(response => {
+          }).catch(error => {
+            console.error(error)
+          })
         })
-        this.chipsOn = false
         this.computer_number = 0
         this.your_number = 0
-        this.rounds = this.rounds + 1
-
-        Cookies.set('total_chips', this.total_chips)
-        Cookies.set('chips', this.chips)
-        Api.put(`/users/${Cookies.get('_id')}`, { money: this.money, chips: this.chips }).then(response => {
-        }).catch(error => {
-          console.error(error)
-        })
-        Api.patch(`/e_banks/${Cookies.get('e_bank_id')}`, { total_chips: this.total_chips }).then(response => {
-        }).catch(error => {
-          console.error(error)
-        })
-        Api.post('/games', { name: this.name, rounds: this.rounds }).then(response => {
-        }).catch(error => {
-          console.error(error)
-        })
       } else {
         alert('Please bet')
       }
