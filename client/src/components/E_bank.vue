@@ -75,6 +75,10 @@ import Cookies from 'js-cookie'
 export default {
   data() {
     return {
+      moneyIn: 0,
+      moneyOut: 0,
+      chipsIn: 0,
+      chipsOut: 0,
       TotalMoney: 0,
       TotalChips: Cookies.get('total_chips'),
       YourMony: Cookies.get('money'),
@@ -99,7 +103,16 @@ export default {
     Api.get(`/e_banks/${this.e_bank_id}`).then(response => {
       this.TotalMoney = response.data.total_money
       this.TotalChips = response.data.total_chips
+      this.moneyIn = response.data.money_in
+      this.moneyOut = response.data.money_out
+      this.chipsIn = response.data.chips_in
+      this.chipsOut = response.data.chips_out
+      Cookies.set('money_in', this.moneyIn)
+      Cookies.set('money_out', this.moneyOut)
+      Cookies.set('chips_in', this.chipsIn)
+      Cookies.set('chips_out', this.chipsOut)
       Cookies.set('total_chips', this.TotalChips)
+      Cookies.set('total_money', this.TotalMoney)
     }).catch(error => {
       alert('Backend error')
       console.error(error)
@@ -113,12 +126,16 @@ export default {
         this.TotalChips = this.TotalChips + Number(this.exchange_money)
         this.YourMony = Number(this.YourMony) + Number(this.exchange_money)
         this.YourChips = Number(this.YourChips) - Number(this.exchange_money)
+        this.moneyOut = Number(this.moneyOut) + Number(this.exchange_money)
+        this.chipsIn = Number(this.chipsIn) + Number(this.exchange_money)
       } else {
         alert('Do not have enough money or chips to exchange')
       }
       const j = {
         total_money: this.TotalMoney,
-        total_chips: this.TotalChips
+        total_chips: this.TotalChips,
+        money_out: this.moneyOut,
+        chips_in: this.chipsIn
       }
       const u = {
         money: this.YourMony,
@@ -127,6 +144,10 @@ export default {
       }
       Api.patch(`/e_banks/${this.e_bank_id}`, j).then(response => {
         console.log(response)
+        Cookies.set('money_out', this.moneyOut)
+        Cookies.set('chips_in', this.chipsIn)
+        Cookies.set('total_chips', this.TotalChips)
+        Cookies.set('total_money', this.TotalMoney)
       }).catch(error => {
         console.error(error)
       })
@@ -150,12 +171,16 @@ export default {
         this.TotalChips = this.TotalChips - Number(this.exchange_chips)
         this.YourMony = Number(this.YourMony) - Number(this.exchange_chips)
         this.YourChips = Number(this.YourChips) + Number(this.exchange_chips)
+        this.chipsOut = Number(this.chipsOut) + Number(this.exchange_chips)
+        this.moneyIn = Number(this.moneyIn) + Number(this.exchange_chips)
       } else {
         alert('Do not have enough money or chips to exchange')
       }
       const j = {
         total_money: this.TotalMoney,
-        total_chips: this.TotalChips
+        total_chips: this.TotalChips,
+        chips_out: this.chipsOut,
+        money_in: this.moneyIn
       }
       const u = {
         money: this.YourMony,
@@ -164,6 +189,10 @@ export default {
       }
       Api.patch(`/e_banks/${this.e_bank_id}`, j).then(response => {
         console.log(response)
+        Cookies.set('money_in', this.moneyIn)
+        Cookies.set('chips_out', this.chipsOut)
+        Cookies.set('total_chips', this.TotalChips)
+        Cookies.set('total_money', this.TotalMoney)
       }).catch(error => {
         console.error(error)
       })

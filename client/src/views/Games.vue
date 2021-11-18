@@ -66,6 +66,8 @@ export default {
       bet: 0,
       money: Cookies.get('money'),
       chips: Cookies.get('chips'),
+      chipsIn: Cookies.get('chips_in'),
+      chipsOut: Cookies.get('chips_out'),
       chipsOn: false
     }
   },
@@ -81,10 +83,12 @@ export default {
             this.results = 'You Lose'
             this.total_chips = Number(this.total_chips) + Number(this.bet)
             this.chips = Number(this.chips) - Number(this.bet)
+            this.chipsIn = Number(this.chipsIn) + Number(this.bet)
           } else if (this.computer_number < this.your_number) {
             this.results = 'You Win'
             this.total_chips = Number(this.total_chips) - Number(this.bet)
             this.chips = Number(this.chips) + Number(this.bet)
+            this.chipsOut = Number(this.chipsOut) + Number(this.bet)
           } else {
             this.results = 'Break even'
           }
@@ -97,11 +101,13 @@ export default {
           this.rounds = this.rounds + 1
           Cookies.set('total_chips', this.total_chips)
           Cookies.set('chips', this.chips)
+          Cookies.set('chips_in', this.chipsIn)
+          Cookies.set('chips_out', this.chipsOut)
           Api.put(`/users/${Cookies.get('_id')}`, { money: this.money, chips: this.chips }).then(response => {
           }).catch(error => {
             console.error(error)
           })
-          Api.patch(`/e_banks/${Cookies.get('e_bank_id')}`, { total_chips: this.total_chips }).then(response => {
+          Api.patch(`/e_banks/${Cookies.get('e_bank_id')}`, { total_chips: this.total_chips, chips_in: this.chipsIn, chips_out: this.chipsOut }).then(response => {
           }).catch(error => {
             console.error(error)
           })
