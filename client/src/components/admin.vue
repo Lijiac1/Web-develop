@@ -2,34 +2,17 @@
     <b-container class="mt-3">.
         <h3>E_bank</h3>
         <b-row>
+            <b-table responsive sticky-header :items="eBanks" :fields="fields" head-variant="light">
+              <template #cell(select)="eBank">
+        <b-button variant="outline-primary" @click="select(eBank.item._id)">Select</b-button>
+      </template>
+      <template #cell(users)="user">
+        <b-button variant="outline-primary" v-b-modal.checkUser @click="checkUsers(user.item._id)">Users</b-button>
+      </template>
+            </b-table>
+          </b-row>
+        <b-row>
             <b-col>
-              <b-card class="mt-5" no-body>
-               <b-nav pills card-header slot="header" >
-                 <b-col><b-nav-item>Total Money</b-nav-item></b-col>
-                 <b-col><b-nav-item>Total Chips</b-nav-item></b-col>
-                 <b-col><b-nav-item>Money In</b-nav-item></b-col>
-                 <b-col><b-nav-item>Money Out</b-nav-item></b-col>
-                 <b-col><b-nav-item>Chips In </b-nav-item></b-col>
-                 <b-col><b-nav-item>Chips Out</b-nav-item></b-col>
-                 <b-col></b-col>
-                 <b-col></b-col>
-               </b-nav>
-               <b-card
-                border-variant="primary"
-                header-bg-variant="primary"
-                header-text-variant="white"
-                style="position:relative; height: 234px; overflow-y:scroll;"
-                >
-                <b-row v-for="eBank in eBanks" :key="eBank._id">
-                  <b-col>{{eBank.total_money}}</b-col>
-                  <b-col>{{eBank.total_chips}}</b-col>
-                  <b-col>{{eBank.money_in}}</b-col>
-                  <b-col>{{eBank.money_out}}</b-col>
-                  <b-col>{{eBank.chips_in}}</b-col>
-                  <b-col>{{eBank.chips_out}}</b-col>
-                  <b-col><b-button variant="outline-primary" @click="select(eBank._id)">Select</b-button></b-col>
-                  <b-col><b-button variant="outline-primary" v-b-modal.checkUser @click="checkUsers(eBank._id)">Users</b-button></b-col>
-                </b-row>
                 <b-modal id="checkUser" ok-only>
                   <b-row id="title">
                     <b-col>Name</b-col>
@@ -41,11 +24,9 @@
                     <b-col>{{user.username}}</b-col>
                     <b-col>{{user.chips}}</b-col>
                     <b-col>{{user.money}}</b-col>
-                    <b-col><b-button variant="danger" size="sm" @click="deleteUser(user._id)">Delete</b-button></b-col>
+                    <b-col><b-button class="mb-4" variant="danger" size="sm" @click="deleteUser(user._id)">Delete</b-button></b-col>
                   </b-row>
                 </b-modal>
-                </b-card>
-              </b-card>
             </b-col>
 
             </b-row>
@@ -109,7 +90,7 @@
         <b-row>
             <b-col>
         <b-card title="Create ebank" class = "mt-2" align-v="center">
-          <b-row>
+          <b-row class="mb-2">
           <b-col>TotalMoney:</b-col><b-col><b-form-input
           id="input-2"
           type="number"
@@ -143,6 +124,32 @@ import { Api } from '../Api'
 export default {
   data() {
     return {
+      fields: [
+        {
+          key: 'total_money'
+        },
+        {
+          key: 'total_chips'
+        },
+        {
+          key: 'money_in'
+        },
+        {
+          key: 'money_out'
+        },
+        {
+          key: 'chips_in'
+        },
+        {
+          key: 'chips_out'
+        },
+        {
+          key: 'select'
+        },
+        {
+          key: 'users'
+        }
+      ],
       TotalMoney: 0,
       TotalChips: 0,
       ModifyMoney: 0,
