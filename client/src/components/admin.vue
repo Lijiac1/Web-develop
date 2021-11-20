@@ -3,11 +3,11 @@
         <h3>E_bank</h3>
         <b-row>
             <b-table responsive sticky-header :items="eBanks" :fields="fields" head-variant="light">
-              <template #cell(select)="eBank">
-        <b-button variant="outline-primary" @click="select(eBank.item._id)">Select</b-button>
+              <template #cell(select)="data">
+        <b-button variant="outline-primary" @click="select(data.item._id)">Select</b-button>
       </template>
-      <template #cell(users)="user">
-        <b-button variant="outline-primary" v-b-modal.checkUser @click="checkUsers(user.item._id)">Users</b-button>
+      <template #cell(users)="data">
+        <b-button variant="outline-primary" v-b-modal.checkUser @click="checkUsers(data.item._id)">Users</b-button>
       </template>
             </b-table>
           </b-row>
